@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_search_items"
+            android:icon="@drawable/ic_search_black_24dp"
+            android:title="Search Items" />
+        <item
+            android:id="@+id/nav_add_item_page"
+            android:icon="@drawable/ic_add_circle_black_24dp"
+            android:title="Add Item" />
+        <item
+            android:id="@+id/nav_export_excel"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Export Excel" />
+        <item
+            android:id="@+id/nav_box_page"
+            android:icon="@drawable/ic_close_black_24dp"
+
+            android:title="Close Box" />
+    </group>
+
+
+
+</menu>
