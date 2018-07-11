@@ -90,7 +90,7 @@ public class SearchItems extends Fragment {
                 newList= tempList.toArray(newList);
                 CustomListAdapter newListAdapter= new CustomListAdapter(getActivity(),newList);
                 list.setAdapter(newListAdapter);
-                return true;
+                return false;
             }
         });
         super.onCreateOptionsMenu(menu, inflater);
