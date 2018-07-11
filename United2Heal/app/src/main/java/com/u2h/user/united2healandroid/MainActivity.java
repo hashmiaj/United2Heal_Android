@@ -59,8 +59,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onPrepareOptionsMenu(Menu menu)
     {
-        MenuItem item=menu.findItem(R.id.action_settings);
-        item.setVisible(false);
+
         super.onPrepareOptionsMenu(menu);
         return true;
     }
@@ -73,9 +72,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
 
         return super.onOptionsItemSelected(item);
     }
