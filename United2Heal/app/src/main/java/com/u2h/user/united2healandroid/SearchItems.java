@@ -1,5 +1,6 @@
 package com.u2h.user.united2healandroid;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,8 +14,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.support.v7.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -38,9 +41,21 @@ public class SearchItems extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        TextView emptyTextView=(TextView)getView().findViewById(R.id.empty);
         list = (ListView) getView().findViewById(R.id.itemListView);
-        CustomListAdapter listAdapter = new CustomListAdapter(getActivity(), items);
+        list.setEmptyView(emptyTextView);
+        Log.i("ListReset","d");
+        final CustomListAdapter listAdapter = new CustomListAdapter(getActivity(), items);
         list.setAdapter(listAdapter);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent loadItemDetails =new Intent(getContext(),ItemPage.class);
+                String name= (String)list.getAdapter().getItem(i);
+                loadItemDetails.putExtra("com.u2h.user.united2healandroid.ITEM_NAME",name);
+                startActivity(loadItemDetails);
+            }
+        });
     }
 
 
@@ -49,7 +64,7 @@ public class SearchItems extends Fragment {
 
         inflater.inflate(R.menu.search_menu,menu);
 
-        MenuItem searchItem=menu.findItem(R.id.action_search);
+        final MenuItem searchItem=menu.findItem(R.id.action_search);
 
         SearchView searchView=(SearchView)searchItem.getActionView();
         searchView.setQueryHint("Search for an item");
@@ -78,18 +93,8 @@ public class SearchItems extends Fragment {
             }
             @Override
             public boolean onQueryTextSubmit(String s) {
-                ArrayList<String> tempList= new ArrayList<>();
-                for(String item:items)
-                {
-                    if(item.toLowerCase().contains(s.toLowerCase()))
-                    {
-                        tempList.add(item);
-                    }
-                }
-                String[] newList= new String[tempList.size()];
-                newList= tempList.toArray(newList);
-                CustomListAdapter newListAdapter= new CustomListAdapter(getActivity(),newList);
-                list.setAdapter(newListAdapter);
+
+                //searchItem.collapseActionView();
                 return false;
             }
         });
