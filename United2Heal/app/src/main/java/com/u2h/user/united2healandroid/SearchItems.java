@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class SearchItems extends Fragment {
     ListView list;
-    String[] items={"test","tes"};
+    String[] items={"Item A","Item B", "Bandages","Bandage Kit","Dummy items"};
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

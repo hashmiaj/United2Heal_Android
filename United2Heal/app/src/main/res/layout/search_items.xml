@@ -8,8 +8,8 @@
 
     <ListView
         android:id="@+id/itemListView"
-        android:layout_width="380dp"
-        android:layout_height="536dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -25,6 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="No items"
+        android:textAlignment="center"
         android:textSize="24sp" />
 
 </android.support.constraint.ConstraintLayout>

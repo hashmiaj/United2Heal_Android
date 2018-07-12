@@ -24,7 +24,8 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".ItemPage"></activity>
+        <activity android:name=".ItemPage" />
+        <activity android:name=".CloseBoxPage"></activity>
     </application>
 
 </manifest>
