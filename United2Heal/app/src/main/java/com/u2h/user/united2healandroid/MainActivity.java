@@ -98,6 +98,9 @@ public class MainActivity extends AppCompatActivity
                 fragment=new AddItemPage();
                 getSupportActionBar().setTitle("Add Item");
                 break;
+            case R.id.nav_read_excel:
+                fragment=new ReadExcel();
+                break;
         }
 
         if(fragment != null)
