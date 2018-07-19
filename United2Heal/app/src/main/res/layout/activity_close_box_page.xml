@@ -55,7 +55,7 @@
         app:layout_constraintTop_toBottomOf="@+id/boxCategoryHeader" />
 
     <TextView
-        android:id="@+id/itemBoxTextView"
+        android:id="@+id/itemBoxTextViewCloseBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -77,5 +77,5 @@
         android:text="Submit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemBoxTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/itemBoxTextViewCloseBox" />
 </android.support.constraint.ConstraintLayout>

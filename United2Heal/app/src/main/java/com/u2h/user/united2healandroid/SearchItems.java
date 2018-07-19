@@ -44,7 +44,6 @@ public class SearchItems extends Fragment {
         TextView emptyTextView=(TextView)getView().findViewById(R.id.empty);
         list = (ListView) getView().findViewById(R.id.itemListView);
         list.setEmptyView(emptyTextView);
-        Log.i("ListReset","d");
         final CustomListAdapter listAdapter = new CustomListAdapter(getActivity(), items);
         list.setAdapter(listAdapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -73,7 +72,10 @@ public class SearchItems extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String s) {
-
+                /*Iterates through the whole list of items and adds items containing
+                the inputted string to a new list. A new ListAdapter is made with the
+                new list inputted for it's values. The ListView displaying the search items
+                is then updated by setting its adapter to the newly created one.*/
                 ArrayList<String> tempList= new ArrayList<>();
                 for(String item:items)
                 {
