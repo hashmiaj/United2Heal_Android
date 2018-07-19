@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListView;
 
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.ss.usermodel.Cell;
@@ -23,7 +25,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.logging.SimpleFormatter;
 
 public class ReadExcel extends Fragment {
     ArrayList<ExcelDataPoint> dataArray;
@@ -31,7 +32,6 @@ public class ReadExcel extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         dataArray=new ArrayList<>();
-        readExcel();
 
         return inflater.inflate(R.layout.read_excel,container,false);
     }
@@ -39,6 +39,17 @@ public class ReadExcel extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        final ListView spreadsheetListView= (ListView) view.findViewById(R.id.spreadsheetDataListView);
+        Button readSpreadsheetButton= (Button) view.findViewById(R.id.readSpreadsheetButton);
+        readSpreadsheetButton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                readExcel();
+                SpreadsheetListAdapter listAdapter=new SpreadsheetListAdapter(getContext(),dataArray);
+                spreadsheetListView.setAdapter(listAdapter);
+            }
+        });
+
     }
 
     private void readExcel() {
@@ -125,10 +136,7 @@ public class ReadExcel extends Fragment {
             double quantity= Double.parseDouble(col[1]);
             dataArray.add(new ExcelDataPoint(col[0],quantity));
         }
-        for(ExcelDataPoint dataPoint :dataArray)
-        {
-            Log.e("Value","Name: "+dataPoint.getItemName()+" Quantity: "+dataPoint.getQuantity());
-        }
+
     }
 
 }
