@@ -44,6 +44,8 @@ public class ExportExcel extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        Log.e("itemList Length",itemList.size()+"");
         super.onViewCreated(view, savedInstanceState);
         enterEmailTextView= (TextView) view.findViewById(R.id.enterEmailTextView);
         progressTextView=(TextView) view.findViewById(R.id.progressTextView);
@@ -93,6 +95,7 @@ public class ExportExcel extends Fragment {
         @Override
         protected void onPreExecute()
         {
+            itemList.clear();
             progressTextView.setText("Connecting to database");
         }
         @Override
