@@ -8,6 +8,7 @@ import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,7 +72,8 @@ public class ExportExcel extends Fragment {
 
             }
             writer.close();
-            Uri path = Uri.fromFile(file);
+            Uri path = FileProvider.getUriForFile(getContext(),getContext().getApplicationContext().getPackageName()+".com.u2h.user.united2healandroid.provider",file);
+
             Intent emailIntent = new Intent(Intent.ACTION_SEND);
             emailIntent.setType("vnd.android.cursor.dir/email");
             String to[]= {enterEmailTextView.getText().toString()};
@@ -85,6 +87,7 @@ public class ExportExcel extends Fragment {
         {
         Log.e("IOERROR",e.getMessage());
         }
+
     }
     private class GetData extends AsyncTask<String,String,String>
     {
@@ -159,6 +162,7 @@ msg=connError.getMessage();
         @Override
         protected void onPostExecute(String msg)
         {
+            if(progressTextView!=null)
             progressTextView.setText(this.msg);
         }
     }
