@@ -1,12 +1,9 @@
 package com.u2h.user.united2healandroid;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.Display;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -18,7 +15,7 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+Fragment fragmentCurrent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,12 +39,17 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        BoxStatsBoxes mainFragment= (BoxStatsBoxes)getSupportFragmentManager().findFragmentByTag("mainFrag");
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            } else {
+
+                    super.onBackPressed();
+
+
+            }
+
     }
 
     @Override
@@ -70,11 +72,14 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+       // if (item != null && item.getItemId() == ID_HOME && mDrawerIndicatorEnabled) {
 
-        //noinspection SimplifiableIfStatement
 
 
-        return super.onOptionsItemSelected(item);
+            //noinspection SimplifiableIfStatement
+
+            return super.onOptionsItemSelected(item);
+
     }
     //Handles main navigation between fragments
     public void DisplayFrame(int id)
@@ -98,13 +103,15 @@ public class MainActivity extends AppCompatActivity
                 fragment=new AddItemPage();
                 getSupportActionBar().setTitle("Add Item");
                 break;
-            case R.id.nav_read_excel:
-                fragment=new ReadExcel();
+            case R.id.nav_box_stats:
+                fragment=new BoxStatsMain();
+                getSupportActionBar().setTitle("Categories");
                 break;
         }
 
         if(fragment != null)
         {
+            fragmentCurrent=fragment;
             FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
             //Replace main frame with newly selected fragment
             fragmentTransaction.replace(R.id.MainFrame,fragment);
@@ -117,6 +124,7 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        getSupportFragmentManager().popBackStack(null,FragmentManager.POP_BACK_STACK_INCLUSIVE);
         DisplayFrame(item.getItemId());
         return true;
     }

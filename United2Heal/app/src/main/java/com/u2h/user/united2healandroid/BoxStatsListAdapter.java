@@ -7,14 +7,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
-public class SpreadsheetListAdapter extends BaseAdapter{
+public class BoxStatsListAdapter extends BaseAdapter{
     LayoutInflater mInflator;
-    private ArrayList<ExcelDataPoint> dataArray;
-    public SpreadsheetListAdapter(Context c, ArrayList<ExcelDataPoint> dataArray)
+    private ArrayList<BoxStatsDataPoint> dataArray;
+    public BoxStatsListAdapter(Context c, ArrayList<BoxStatsDataPoint> dataArray)
     {
        this.dataArray=dataArray;
         mInflator=(LayoutInflater)c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -40,7 +38,7 @@ public class SpreadsheetListAdapter extends BaseAdapter{
         TextView itemNameTextView=v.findViewById(R.id.itemNameTextView);
         TextView quantitiyTextView=v.findViewById(R.id.quantityTextView);
         itemNameTextView.setText(dataArray.get(i).getItemName());
-        quantitiyTextView.setText(dataArray.get(i).getQuantity()+"");
+        quantitiyTextView.setText(dataArray.get(i).getQuantity()+"x");
 
         return v;
     }

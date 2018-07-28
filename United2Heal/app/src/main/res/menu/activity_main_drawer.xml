@@ -24,9 +24,13 @@
             android:icon="@drawable/ic_menu_send"
             android:title="Export Excel" />
         <item
+            android:id="@+id/nav_box_stats"
+            android:icon="@drawable/ic_list_black_24dp"
+            android:title="Box Stats" />
+        <!--><item
             android:id="@+id/nav_read_excel"
             android:icon="@drawable/ic_menu_send"
-            android:title="(Experimental) read excel" />
+            android:title="(Experimental) read excel" /></!-->
     </group>
 
 

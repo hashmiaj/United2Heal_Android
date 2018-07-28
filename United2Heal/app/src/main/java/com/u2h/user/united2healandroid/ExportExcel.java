@@ -73,7 +73,7 @@ public class ExportExcel extends Fragment {
             writer.close();
             Uri path = Uri.fromFile(file);
             Intent emailIntent = new Intent(Intent.ACTION_SEND);
-            emailIntent .setType("vnd.android.cursor.dir/email");
+            emailIntent.setType("vnd.android.cursor.dir/email");
             String to[]= {enterEmailTextView.getText().toString()};
             emailIntent .putExtra(Intent.EXTRA_EMAIL, to);
             emailIntent .putExtra(Intent.EXTRA_STREAM, path);
