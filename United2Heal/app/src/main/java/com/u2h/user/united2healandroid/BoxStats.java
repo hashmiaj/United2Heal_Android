@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -58,7 +59,8 @@ public class BoxStats extends AppCompatActivity {
     }
     public void  emailCSV()
     {
-        Uri pathToFile= Uri.fromFile(csvFile);
+        Context context=BoxStats.this;
+        Uri pathToFile= FileProvider.getUriForFile(context,context.getApplicationContext().getPackageName()+".com.u2h.user.united2healandroid.provider",csvFile);
         Intent emailIntent=new Intent(Intent.ACTION_SEND);
         emailIntent.setType("vnd.android.cursor.dir/email");
         emailIntent.putExtra(Intent.EXTRA_STREAM,pathToFile);
