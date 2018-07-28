@@ -1,10 +1,10 @@
 package com.u2h.user.united2healandroid;
 
-public class ExcelDataPoint {
+public class BoxStatsDataPoint {
     private String itemName;
-    private double quantity;
+    private int quantity;
 
-    public ExcelDataPoint(String itemName, double quantity) {
+    public BoxStatsDataPoint(String itemName, int quantity) {
         this.itemName = itemName;
         this.quantity = quantity;
     }
@@ -16,7 +16,7 @@ public class ExcelDataPoint {
         this.itemName = itemName;
     }
 
-    public double getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
