@@ -17,12 +17,14 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class BoxStatsMain extends Fragment {
@@ -74,13 +76,23 @@ public class BoxStatsMain extends Fragment {
                 Class.forName(JDBC_DRIVER);
                 conn= DriverManager.getConnection(DB_URL,DatabaseStrings.USERNAME,DatabaseStrings.PASSWORD);
                 stmnt=conn.createStatement();
-                String sql="SELECT * FROM u2hdb.CategoryTable";
+                String sql="SELECT * FROM u2hdb.BoxTable";
                 ResultSet rs= stmnt.executeQuery(sql);
                 while(rs.next())
                 {
                 categoryList.add(rs.getString("CategoryName"));
                 }
-
+                ArrayList<String> tempList=new ArrayList<>();
+                HashSet tempSet=new HashSet<>();
+                for(String s: categoryList)
+                {
+                    if(!tempSet.contains(s))
+                    {
+                        tempSet.add(s);
+                        tempList.add(s);
+                    }
+                }
+                categoryList=tempList;
                 rs.close();
                 stmnt.close();
                 conn.close();
