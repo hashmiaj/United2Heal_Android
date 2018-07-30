@@ -13,6 +13,12 @@ public class Item {
         this.itemQuantity = itemQuantity;
         this.itemBox = itemBox;
     }
+    public Item(String itemCategory,int itemID,String itemName)
+    {
+        this.itemCategory=itemCategory;
+        this.itemID=itemID;
+        this.itemName=itemName;
+    }
 
     private String itemBox;
 

@@ -39,9 +39,12 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".ItemPage" />
-        <activity android:name=".CloseBoxPage" />
-        <activity android:name=".BoxStats"></activity>
+        <activity android:name=".ItemPage"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".CloseBoxPage"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".BoxStats"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
