@@ -40,11 +40,14 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity android:name=".ItemPage"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:label="Submit Item"/>
         <activity android:name=".CloseBoxPage"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:label="Close Box"/>
         <activity android:name=".BoxStats"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:label="Box Details"></activity>
     </application>
 
 </manifest>
