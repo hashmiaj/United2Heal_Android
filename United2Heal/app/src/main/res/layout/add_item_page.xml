@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+<!-->
     <TextView
         android:id="@+id/itemBoxHeader"
         android:layout_width="0dp"
@@ -22,7 +22,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itemCategorySpinner" />
-
+<!-->
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
@@ -42,6 +42,7 @@
             android:layout_width="104dp"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="Enter Code"
             android:inputType="number"
             android:textSize="14sp"
             tools:layout_editor_absoluteX="107dp"
@@ -132,7 +133,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itemCategoryHeader" />
 
-    <TextView
+    <!--><TextView
         android:id="@+id/itemBoxTextViewCloseBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -144,18 +145,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itemBoxHeader" />
-
+<!-->
     <Button
         android:id="@+id/submitItemButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemBoxTextViewCloseBox" />
+        app:layout_constraintTop_toBottomOf="@+id/itemCategorySpinner"
+        app:layout_constraintVertical_bias="0.44" />
 
 
 </android.support.constraint.ConstraintLayout>
