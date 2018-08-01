@@ -59,7 +59,6 @@ public class BoxStatsMain extends Fragment {
                 fragment.setArguments(data);
                 fragmentTransaction.replace(R.id.MainFrame, fragment, "BoxList").addToBackStack(null);
                 ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Boxes");
-                 ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 fragmentTransaction.commit();
             }
         });
