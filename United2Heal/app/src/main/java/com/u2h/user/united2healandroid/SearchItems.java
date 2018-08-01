@@ -114,7 +114,12 @@ public class SearchItems extends Fragment {
         static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
         Boolean isEmpty = false;
         static final String DB_URL = "jdbc:mysql://" + DatabaseStrings.DATABASE_URL + "/" + DatabaseStrings.DATABASE_NAME;
+        @Override
+        protected void onPreExecute()
+        {
+itemList.clear();
 
+        }
         @Override
         protected String doInBackground(String... strings) {
             Connection conn = null;

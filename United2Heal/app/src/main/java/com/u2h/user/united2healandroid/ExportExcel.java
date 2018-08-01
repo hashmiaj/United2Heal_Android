@@ -65,10 +65,10 @@ public class ExportExcel extends Fragment {
         {
             File file=new File(getContext().getExternalCacheDir().toString()+"/database.csv");
             CSVWriter writer= new CSVWriter(new FileWriter(file));
-            writer.writeNext(new String[]{"ItemID","ItemName","ItemCategory","ItemQuantity","ItemBox"});
+            writer.writeNext(new String[]{"ItemID","ItemCategory","ItemName"});
             for(Item i:itemList)
             {
-                writer.writeNext(new String[]{Integer.toString(i.getItemID()),i.getItemName(),i.getItemCategory(),Integer.toString(i.getItemQuantity()),i.getItemBox()});
+                writer.writeNext(new String[]{Integer.toString(i.getItemID()),i.getItemCategory(),i.getItemName()});
 
             }
             writer.close();
@@ -110,16 +110,15 @@ public class ExportExcel extends Fragment {
                 Class.forName(JDBC_DRIVER);
                 conn= DriverManager.getConnection(DB_URL,DatabaseStrings.USERNAME,DatabaseStrings.PASSWORD);
                 stmnt=conn.createStatement();
-                String sql="SELECT * FROM u2hdb.SampleItemTable";
+                String sql="SELECT * FROM u2hdb.ItemTable";
                 ResultSet rs=stmnt.executeQuery(sql);
                 while(rs.next())
                 {
                     int itemId=rs.getInt("ItemID");
                     String itemName=rs.getString("ItemName");
-                    String itemCategory=rs.getString("ItemCategory");
-                    int itemQuantity= rs.getInt("ItemQuantity");
-                    String itemBox=rs.getString("ItemBox");
-                    itemList.add(new Item(itemCategory,itemId,itemName,itemQuantity,itemBox));
+                    String itemCategory=rs.getString("CategoryName");
+
+                    itemList.add(new Item(itemCategory,itemId,itemName));
 
                 }
 

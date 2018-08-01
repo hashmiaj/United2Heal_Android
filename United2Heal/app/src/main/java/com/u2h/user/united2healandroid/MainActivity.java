@@ -95,10 +95,7 @@ Fragment fragmentCurrent;
                 fragment=new ExportExcel();
                 getSupportActionBar().setTitle("Export Excel");
                 break;
-            case R.id.nav_box_page:
-                fragment=new BoxPage();
-                getSupportActionBar().setTitle("Close Box");
-                break;
+
             case R.id.nav_add_item_page:
                 fragment=new AddItemPage();
                 getSupportActionBar().setTitle("Add Item");
