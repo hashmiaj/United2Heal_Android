@@ -15,11 +15,6 @@
             android:title="Add Item" />
 
         <item
-            android:id="@+id/nav_box_page"
-            android:icon="@drawable/ic_close_black_24dp"
-
-            android:title="Close Box" />
-        <item
             android:id="@+id/nav_export_excel"
             android:icon="@drawable/ic_menu_send"
             android:title="Export Excel" />
