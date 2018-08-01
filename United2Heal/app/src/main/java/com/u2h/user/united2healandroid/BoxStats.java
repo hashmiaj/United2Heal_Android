@@ -30,6 +30,7 @@ import java.util.List;
 
 public class BoxStats extends AppCompatActivity {
     private String selectedBox;
+    private String selectedCategory;
     File csvFile;
     private TextView emptyTextView;
     private ArrayList<BoxStatsDataPoint> boxStats= new ArrayList<>();
@@ -52,6 +53,8 @@ public class BoxStats extends AppCompatActivity {
         if(getIntent().getExtras()!=null)
         {
             selectedBox=getIntent().getExtras().getString("com.u2h.user.united2healandroid.BOX_NAME_PICKED");
+            selectedCategory=getIntent().getExtras().getString("com.u2h.user.united2healandroid.BOX_CATEGORY_PICKED");
+
             GetData data=new GetData();
             data.execute();
         }
@@ -64,7 +67,7 @@ public class BoxStats extends AppCompatActivity {
         Intent emailIntent=new Intent(Intent.ACTION_SEND);
         emailIntent.setType("vnd.android.cursor.dir/email");
         emailIntent.putExtra(Intent.EXTRA_STREAM,pathToFile);
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT,"Box "+selectedBox+" Datatable CSV");
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT,selectedCategory+" Box "+selectedBox+" Datatable CSV");
         startActivity(Intent.createChooser(emailIntent,"Send email..."));
     }
     public void exportToCSV()
@@ -72,7 +75,7 @@ public class BoxStats extends AppCompatActivity {
         Context context=BoxStats.this;
     try
     {
-        csvFile=new File(context.getExternalCacheDir().toString()+"/boxdatabase.csv");
+        csvFile=new File(context.getExternalCacheDir().toString()+"/"+selectedCategory+" Box "+selectedBox+".csv");
         CSVWriter csvWriter=new CSVWriter(new FileWriter(csvFile));
         csvWriter.writeNext(new String[]{"ItemName","ItemQuantity"});
         for(int i=0; i<boxStats.size();i++) {

@@ -52,6 +52,8 @@ public class BoxStatsBoxes extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent=new Intent(getActivity(),BoxStats.class);
                 intent.putExtra("com.u2h.user.united2healandroid.BOX_NAME_PICKED",mainListView.getAdapter().getItem(i).toString());
+                intent.putExtra("com.u2h.user.united2healandroid.BOX_CATEGORY_PICKED",categoryClicked);
+
                 startActivity(intent);
             }
         });
