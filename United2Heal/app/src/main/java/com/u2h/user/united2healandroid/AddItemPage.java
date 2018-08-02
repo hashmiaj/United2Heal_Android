@@ -170,6 +170,7 @@ public class AddItemPage extends Fragment {
                 {
                     existingNames.add(rs.getString("ItemName").toLowerCase());
                 }
+                rs.close();
              for(String s:existingNames)
              {
                  if(s.toLowerCase().equals(itemName.toLowerCase()))
@@ -185,6 +186,8 @@ public class AddItemPage extends Fragment {
                  stmnt.executeUpdate(sql);
              }
              success=true;
+             stmnt.close();
+             conn.close();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (SQLException e) {
@@ -194,6 +197,22 @@ public class AddItemPage extends Fragment {
                 }
 
                     e.printStackTrace();
+
+            }
+            finally {
+
+                try {
+                    if (stmnt != null)
+                        stmnt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if (conn != null)
+                        conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
             return null;
         }
