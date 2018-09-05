@@ -104,6 +104,10 @@ Fragment fragmentCurrent;
                 fragment=new BoxStatsMain();
                 getSupportActionBar().setTitle("Categories");
                 break;
+            case R.id.nav_admin_page:
+                fragment= new AdminPanelFragment();
+                getSupportActionBar().setTitle("Admin Panel");
+                break;
         }
 
         if(fragment != null)

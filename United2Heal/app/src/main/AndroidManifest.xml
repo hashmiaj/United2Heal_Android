@@ -21,8 +21,9 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -39,15 +40,18 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".ItemPage"
-            android:screenOrientation="portrait"
-            android:label="Submit Item"/>
-        <activity android:name=".CloseBoxPage"
-            android:screenOrientation="portrait"
-            android:label="Close Box"/>
-        <activity android:name=".BoxStats"
-            android:screenOrientation="portrait"
-            android:label="Box Details"></activity>
+        <activity
+            android:name=".ItemPage"
+            android:label="Submit Item"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CloseBoxPage"
+            android:label="Close Box"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BoxStats"
+            android:label="Box Details"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
