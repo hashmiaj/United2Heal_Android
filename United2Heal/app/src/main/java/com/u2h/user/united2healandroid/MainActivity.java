@@ -10,8 +10,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -22,19 +24,19 @@ Fragment fragmentCurrent;
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+DrawerLayout drawer=(DrawerLayout) findViewById(R.id.drawer_layout);
 
 
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer,toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+        toggle.setDrawerIndicatorEnabled(false);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //Display search menu as default page for now
-        DisplayFrame(R.id.nav_search_items);
+        DisplayFrame(0);
     }
 
     @Override
@@ -56,6 +58,7 @@ Fragment fragmentCurrent;
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
         return true;
     }
     @Override
@@ -87,6 +90,11 @@ Fragment fragmentCurrent;
         Fragment fragment = null;
         //Create fragment based off of id of clicked navigation item
         switch(id){
+            case 0:
+                fragment=new PasswordPage();
+                getSupportActionBar().setTitle("Enter Password");
+                break;
+
             case R.id.nav_search_items:
                 fragment=new SearchItems();
                 getSupportActionBar().setTitle("Search Items");
