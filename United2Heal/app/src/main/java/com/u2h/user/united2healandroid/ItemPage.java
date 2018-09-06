@@ -171,12 +171,12 @@ public class ItemPage extends AppCompatActivity {
                 rs.close();
                 if(count>0)
                 {
-                    sql="UPDATE u2hdb.ItemBox SET ItemQuantity=ItemQuantity+"+itemQuantity+" where ItemName='" + selectedItem + "' AND BoxName='" + selectedBox + "'";
+                    sql="UPDATE u2hdb.ItemBox SET ItemQuantity=ItemQuantity+"+itemQuantity+" where ItemName='" + selectedItem + "' AND BoxName='" + selectedBox + "' and CategoryName='"+itemCategory+"'";
                     stmnt.executeUpdate(sql);
 
                 }else {
                     sql = "INSERT INTO u2hdb.ItemBox\n" +
-                            "Values (" + random + ",'','" + itemID + "','" + itemQuantity + "','" + selectedBox + "','" + selectedItem + "')";
+                            "Values (" + random + ",'','" + itemID + "','" + itemQuantity + "','" + selectedBox + "','" + itemCategory+"','"+selectedItem + "')";
                     stmnt.executeUpdate(sql);
                 }
                 conn.close();
