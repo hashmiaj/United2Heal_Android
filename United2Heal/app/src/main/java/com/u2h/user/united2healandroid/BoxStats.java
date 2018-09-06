@@ -105,7 +105,7 @@ public class BoxStats extends AppCompatActivity {
                 Class.forName(DatabaseStrings.JDBC_DRIVER);
                 conn= DriverManager.getConnection(DatabaseStrings.DB_URL,DatabaseStrings.USERNAME,DatabaseStrings.PASSWORD);
                 stmnt=conn.createStatement();
-                String sql="SELECT * from u2hdb.ItemBox where BoxName='"+selectedBox+"'";
+                String sql="SELECT * from u2hdb.ItemBox where BoxName='"+selectedBox+"' AND CategoryName='"+selectedCategory+"'";
                 ResultSet rs=stmnt.executeQuery(sql);
                 while(rs.next())
                 {
