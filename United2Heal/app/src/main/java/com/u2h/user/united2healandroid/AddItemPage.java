@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,28 @@ import java.util.HashSet;
 
 public class AddItemPage extends Fragment {
     ArrayList<String> categoryList=new ArrayList<>();
+    String[] hardcodedArray={"Lab" ,
+            "Surgical Instruments" ,
+            "Rehab" ,
+            "Sterilization" ,
+            "Furnishing Textiles" ,
+            "Diagnostic Supplies" ,
+            "Pharmaceuticals" ,
+            "Collection Drainage Suction" ,
+            "Incontinence" ,
+            "GI" ,
+            "Respiratory" ,
+            "Apparel" ,
+            "Housekeeping" ,
+            "Wound Care" ,
+            "Utensils" ,
+            "Wound Closure" ,
+            "Patient Comfort" ,
+            "I.V. Therapy" ,
+            "Personal Hygiene" ,
+            "Needles and Syringes" ,
+            "Implants" ,
+            "Gloves"};
     TextView nameInputTextView;
     Spinner itemCategorySpinner;
     Button generateCodeButton;
@@ -61,7 +84,10 @@ public class AddItemPage extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+                for(int i=0; i<itemCategorySpinner.getAdapter().getCount(); i++)
+                {
+                    itemCategorySpinner.setGravity(Gravity.CENTER);
+                }
             }
         });
         Button submitItemButton=(Button) view.findViewById(R.id.submitItemButton);
@@ -120,6 +146,10 @@ public class AddItemPage extends Fragment {
                 while (rs.next())
                 {
                     categoryList.add(rs.getString("CategoryName"));
+                }
+                for(String s: hardcodedArray)
+                {
+                    categoryList.add(s);
                 }
                 ArrayList<String> temp= new ArrayList<>();
                 HashSet<String> hashSet=new HashSet<>();
