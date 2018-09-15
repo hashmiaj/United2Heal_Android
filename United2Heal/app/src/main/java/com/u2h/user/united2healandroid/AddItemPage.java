@@ -72,11 +72,11 @@ public class AddItemPage extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        itemCategorySpinner=(Spinner)view.findViewById(R.id.itemCategorySpinner);
+        //itemCategorySpinner=(Spinner)view.findViewById(R.id.itemCategorySpinner);
         codeInputTextView=(TextView) view.findViewById(R.id.itemCodeInput);
         nameInputTextView=(TextView) view.findViewById(R.id.itemNameInput);
         generateCodeButton=(Button) view.findViewById(R.id.generateCodeButton);
-        itemCategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        /*itemCategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 categoryName=itemCategorySpinner.getAdapter().getItem(i).toString();
@@ -84,12 +84,9 @@ public class AddItemPage extends Fragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                for(int i=0; i<itemCategorySpinner.getAdapter().getCount(); i++)
-                {
-                    itemCategorySpinner.setGravity(Gravity.CENTER);
-                }
+
             }
-        });
+        });*/
         Button submitItemButton=(Button) view.findViewById(R.id.submitItemButton);
         submitItemButton.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -102,12 +99,7 @@ public class AddItemPage extends Fragment {
 
                 }
                 else if(!StringUtils.isNumeric(code) ) {
-                    Toast.makeText(getActivity(),"Error: Invalid Code",Toast.LENGTH_SHORT).show();
-
-                }
-                else if(!connectedToDB)
-                {
-                    Toast.makeText(getActivity(),"Error: No connection yet",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Error: Invalid Code", Toast.LENGTH_SHORT).show();
 
                 }
                 else{
@@ -123,10 +115,10 @@ public class AddItemPage extends Fragment {
                 codeInputTextView.setText(String.valueOf(rand));
             }
         });
-        GetData data= new GetData();
-        data.execute();
+        /*GetData data= new GetData();
+        data.execute();*/
     }
-    private class GetData extends AsyncTask<String,String,String>
+    /*private class GetData extends AsyncTask<String,String,String>
     {
         Connection conn= null;
         Statement stmnt=null;
@@ -173,13 +165,14 @@ public class AddItemPage extends Fragment {
         protected void onPostExecute(String msg)
         {
             ArrayAdapter<String> arrayAdapter=new ArrayAdapter<>(getActivity(),R.layout.spinner_item_small,categoryList);
+            arrayAdapter.setDropDownViewResource(R.layout.spinner_layout_dropdown_resource);
             itemCategorySpinner.setAdapter(arrayAdapter);
             if(categoryList.size()>0)
             {
                 connectedToDB=true;
             }
         }
-    }
+    }*/
     private class PostData extends AsyncTask<String,String,String>
     {
         Connection conn;
@@ -212,7 +205,7 @@ public class AddItemPage extends Fragment {
              if(!duplicate)
              {
                  sql="INSERT INTO u2hdb.ItemTable \n"+
-                         "values ("+code+",'"+categoryName+"','"+itemName+"')";
+                         "values ("+code+",'','"+itemName+"')";
                  stmnt.executeUpdate(sql);
              }
              success=true;

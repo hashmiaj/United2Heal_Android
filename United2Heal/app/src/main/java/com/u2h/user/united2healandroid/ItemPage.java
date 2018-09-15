@@ -3,6 +3,7 @@ package com.u2h.user.united2healandroid;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,7 +12,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class ItemPage extends AppCompatActivity {
     String itemCategory;
     String itemID;
-    TextView itemCategoryTextView;
+    TextView groupNameTextView;
     TextView itemIdTextView;
     String selectedItem;
     Spinner itemBoxSpinner;
@@ -37,7 +37,7 @@ public class ItemPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_page);
         TextView itemNameTextView = (TextView) findViewById(R.id.itemNameTextView);
-        itemCategoryTextView = (TextView) findViewById(R.id.itemCategoryTextView);
+        groupNameTextView = (TextView) findViewById(R.id.groupNameTextView);
         itemIdTextView = (TextView) findViewById(R.id.codeTextView);
         itemBoxSpinner = (Spinner) findViewById(R.id.itemBoxSpinner);
         submitButton = (Button) findViewById(R.id.submitButton);
@@ -60,11 +60,6 @@ public class ItemPage extends AppCompatActivity {
                 itemQuantity = quantityTextView.getText().toString();
                 if(itemQuantity.equals("")) {
                     Toast.makeText(getApplicationContext(),"Error: Enter a quantity ",Toast.LENGTH_SHORT).show();
-                }
-                else if(!connectedToDB)
-                {
-                    Toast.makeText(getApplicationContext(),"Wait for Database to connect",Toast.LENGTH_SHORT).show();
-
                 }
                 else  {
                     PostData postData = new PostData();
@@ -101,13 +96,12 @@ public class ItemPage extends AppCompatActivity {
                 ResultSet rs = stmnt.executeQuery(sql);
 
                 while (rs.next()) {
-                    itemCategory = rs.getString("CategoryName");
                     itemID = rs.getInt("ItemID") + "";
                 }
-                sql = "Select * from u2hdb.BoxTable WHERE IsOpen=1 and CategoryName='" + itemCategory + "'";
+                sql = "Select * from u2hdb.BoxTable WHERE IsOpen=1 and GroupName='" + ((UserInfo)getApplication()).getGroupName() + "' ORDER BY BoxNumber ASC";
                 rs = stmnt.executeQuery(sql);
                 while (rs.next()) {
-                    boxList.add(rs.getString("BoxName"));
+                    boxList.add(rs.getString("BoxNumber"));
                 }
                 conn.close();
                 stmnt.close();
@@ -137,9 +131,10 @@ public class ItemPage extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String msg) {
-            itemCategoryTextView.setText(itemCategory);
+            groupNameTextView.setText(((UserInfo)getApplication()).getGroupName());
             itemIdTextView.setText(itemID);
             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(ItemPage.this, R.layout.spinner_item, boxList);
+            dataAdapter.setDropDownViewResource(R.layout.spinner_layout_dropdown_resource);
             itemBoxSpinner.setAdapter(dataAdapter);
             connectedToDB=true;
         }
@@ -164,20 +159,21 @@ public class ItemPage extends AppCompatActivity {
                 ArrayList<String> itemBoxEntries = new ArrayList<>();
                 ArrayList<Integer> itemBoxID = new ArrayList<>();
                 int random = (int) (Math.random() * 100000);
-                String sql = "Select Count(*) AS length from u2hdb.ItemBox where ItemName='" + selectedItem + "' AND BoxName='" + selectedBox + "'";
+                String sql = "Select Count(*) AS length from u2hdb.ItemBox where ItemName='" + selectedItem + "' AND BoxNumber='" + selectedBox + "' AND GroupName='"+((UserInfo)getApplication()).getGroupName()+"'";
                 ResultSet rs = stmnt.executeQuery(sql);
                 rs.next();
                 int count=rs.getInt("length");
                 rs.close();
                 if(count>0)
                 {
-                    sql="UPDATE u2hdb.ItemBox SET ItemQuantity=ItemQuantity+"+itemQuantity+" where ItemName='" + selectedItem + "' AND BoxName='" + selectedBox + "' and CategoryName='"+itemCategory+"'";
+                    sql="UPDATE u2hdb.ItemBox SET ItemQuantity=ItemQuantity+"+itemQuantity+" where ItemName='" + selectedItem + "' AND BoxNumber='" + selectedBox + "' and GroupName='"+((UserInfo)getApplication()).getGroupName()+"'";
                     stmnt.executeUpdate(sql);
 
                 }else {
                     sql = "INSERT INTO u2hdb.ItemBox\n" +
-                            "Values (" + random + ",'','" + itemID + "','" + itemQuantity + "','" + selectedBox + "','" + itemCategory+"','"+selectedItem + "')";
+                            "Values (" + random + ",'" + itemID + "','" + itemQuantity + "'," + selectedBox + ",'Test','" + selectedItem+"','"+((UserInfo)getApplication()).getGroupName() + "')";
                     stmnt.executeUpdate(sql);
+                    Log.e("REEEEEEEE","");
                 }
                 conn.close();
                 stmnt.close();
