@@ -14,13 +14,16 @@ import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class AdminPanelFragment extends Fragment {
     TextView changePasswordTextView;
     Button changePasswordButton;
     String passValue;
+    ArrayList<String> categoryList=new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -93,6 +96,50 @@ public class AdminPanelFragment extends Fragment {
         {
             Toast.makeText(getActivity(),"Password changed to \""+passValue+"\"", Toast.LENGTH_SHORT).show();
 
+        }
+    }
+    public class GetCategoryData extends AsyncTask<String,String,String>
+    {
+        Connection conn;
+        Statement stmnt;
+
+        @Override
+        protected String doInBackground(String... strings) {
+            try {
+                Class.forName(DatabaseStrings.JDBC_DRIVER);
+                Connection conn= DriverManager.getConnection(DatabaseStrings.DB_URL,DatabaseStrings.USERNAME,DatabaseStrings.PASSWORD);
+                String sql= "Select DISTINCT CategoryName from u2hdb.BoxTable";
+                stmnt=conn.createStatement();
+                ResultSet rs= stmnt.executeQuery(sql);
+                while(rs.next())
+                {categoryList.add(rs.getString("CategoryName"));
+
+                }
+                rs.close();
+                stmnt.close();
+                conn.close();
+
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }finally {
+                try{
+                    if(stmnt!=null)
+                        stmnt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                try{
+                    if(conn!=null)
+                        conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            return null;
         }
     }
 }
