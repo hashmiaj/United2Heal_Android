@@ -96,6 +96,10 @@ public class SearchItems extends Fragment {
 
                 CustomListAdapter newListAdapter = new CustomListAdapter(getActivity(), newList);
                 list.setAdapter(newListAdapter);
+                if(newListAdapter.getCount()==0)
+                {
+                    emptyTextView.setText("No items match your search");
+                }
                 return true;
             }
 
@@ -167,7 +171,7 @@ itemList.clear();
             CustomListAdapter listAdapter = new CustomListAdapter(getContext(), itemList.toArray(newList));
             list.setAdapter(listAdapter);
             if (isEmpty) {
-                emptyTextView.setText("No boxes in this category");
+                emptyTextView.setText("No Items");
             }
         }
     }
