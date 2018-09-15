@@ -18,19 +18,16 @@ import com.opencsv.CSVWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URI;
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 public class BoxStats extends AppCompatActivity {
     private String selectedBox;
-    private String selectedCategory;
+    private String selectedGroup;
     File csvFile;
     private TextView emptyTextView;
     private ArrayList<BoxStatsDataPoint> boxStats= new ArrayList<>();
@@ -53,7 +50,7 @@ public class BoxStats extends AppCompatActivity {
         if(getIntent().getExtras()!=null)
         {
             selectedBox=getIntent().getExtras().getString("com.u2h.user.united2healandroid.BOX_NAME_PICKED");
-            selectedCategory=getIntent().getExtras().getString("com.u2h.user.united2healandroid.BOX_CATEGORY_PICKED");
+            selectedGroup =getIntent().getExtras().getString("com.u2h.user.united2healandroid.BOX_CATEGORY_PICKED");
 
             GetData data=new GetData();
             data.execute();
@@ -67,7 +64,7 @@ public class BoxStats extends AppCompatActivity {
         Intent emailIntent=new Intent(Intent.ACTION_SEND);
         emailIntent.setType("vnd.android.cursor.dir/email");
         emailIntent.putExtra(Intent.EXTRA_STREAM,pathToFile);
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT,selectedCategory+" Box "+selectedBox+" Datatable CSV");
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, selectedGroup +" Box "+selectedBox+" Datatable CSV");
         startActivity(Intent.createChooser(emailIntent,"Send email..."));
     }
     public void exportToCSV()
@@ -75,7 +72,7 @@ public class BoxStats extends AppCompatActivity {
         Context context=BoxStats.this;
     try
     {
-        csvFile=new File(context.getExternalCacheDir().toString()+"/"+selectedCategory+" Box "+selectedBox+".csv");
+        csvFile=new File(context.getExternalCacheDir().toString()+"/"+ selectedGroup +" Box "+selectedBox+".csv");
         CSVWriter csvWriter=new CSVWriter(new FileWriter(csvFile));
         csvWriter.writeNext(new String[]{"ItemName","ItemQuantity"});
         for(int i=0; i<boxStats.size();i++) {
@@ -105,7 +102,7 @@ public class BoxStats extends AppCompatActivity {
                 Class.forName(DatabaseStrings.JDBC_DRIVER);
                 conn= DriverManager.getConnection(DatabaseStrings.DB_URL,DatabaseStrings.USERNAME,DatabaseStrings.PASSWORD);
                 stmnt=conn.createStatement();
-                String sql="SELECT * from u2hdb.ItemBox where BoxName='"+selectedBox+"' AND CategoryName='"+selectedCategory+"'";
+                String sql="SELECT * from u2hdb.ItemBox where BoxNumber='"+selectedBox+"' AND GroupName='"+ selectedGroup +"'";
                 ResultSet rs=stmnt.executeQuery(sql);
                 while(rs.next())
                 {

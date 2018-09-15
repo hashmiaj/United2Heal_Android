@@ -13,7 +13,7 @@
         android:layout_height="27dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/rounded_corners"
         android:text="Item Box"
         android:textAlignment="center"
@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/quantityEdit" />
+        app:layout_constraintTop_toBottomOf="@+id/datePicker" />
 
     <TextView
         android:id="@+id/itemQuantityHeader"
@@ -39,17 +39,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemCategoryTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/groupNameTextView" />
 
     <TextView
-        android:id="@+id/itemCategory"
+        android:id="@+id/expireDateHeader"
         android:layout_width="0dp"
         android:layout_height="27dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_corners"
-        android:text="Item Category"
+        android:text="Item Expirey Date"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quantityEdit" />
+
+    <TextView
+        android:id="@+id/groupName"
+        android:layout_width="0dp"
+        android:layout_height="27dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_corners"
+        android:text="Group Name"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="18sp"
@@ -59,7 +76,7 @@
         app:layout_constraintTop_toBottomOf="@+id/codeTextView" />
 
     <TextView
-        android:id="@+id/itemCategoryTextView"
+        android:id="@+id/groupNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -69,7 +86,7 @@
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemCategory" />
+        app:layout_constraintTop_toBottomOf="@+id/groupName" />
 
     <TextView
         android:id="@+id/codeTitle"
@@ -176,5 +193,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itemBoxHeader" />
+
+    <EditText
+        android:id="@+id/datePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="date"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/expireDateHeader" />
 
 </android.support.constraint.ConstraintLayout>

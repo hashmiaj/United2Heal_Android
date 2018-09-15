@@ -22,7 +22,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class BoxStatsBoxes extends Fragment {
-    private String categoryClicked;
+    private String groupClicked;
     TextView emptyTextView;
     private ArrayList<String> boxList=new ArrayList<>();
     ListView mainListView;
@@ -41,7 +41,7 @@ public class BoxStatsBoxes extends Fragment {
         Bundle data=this.getArguments();
         if(data!=null)
         {
-            categoryClicked=data.getString("com.u2h.user.united2healandroid.SELECTED_CATEGORY");
+            groupClicked=data.getString("com.u2h.user.united2healandroid.SELECTED_GROUP");
         }
         mainListView=(ListView)view.findViewById(R.id.boxStatsListView);
         emptyTextView=(TextView)getView().findViewById(R.id.emptyTextView);
@@ -52,13 +52,13 @@ public class BoxStatsBoxes extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent=new Intent(getActivity(),BoxStats.class);
                 intent.putExtra("com.u2h.user.united2healandroid.BOX_NAME_PICKED",mainListView.getAdapter().getItem(i).toString());
-                intent.putExtra("com.u2h.user.united2healandroid.BOX_CATEGORY_PICKED",categoryClicked);
+                intent.putExtra("com.u2h.user.united2healandroid.BOX_CATEGORY_PICKED",groupClicked);
 
                 startActivity(intent);
             }
         });
     }
-    private  class GetData extends AsyncTask<String,String,String> {
+    private class GetData extends AsyncTask<String,String,String> {
         static final String JDBC_DRIVER="com.mysql.jdbc.Driver";
         Boolean isEmpty=false;
         static final String DB_URL="jdbc:mysql://"+DatabaseStrings.DATABASE_URL+"/"+DatabaseStrings.DATABASE_NAME;
@@ -70,12 +70,12 @@ public class BoxStatsBoxes extends Fragment {
                 Class.forName(JDBC_DRIVER);
                 conn= DriverManager.getConnection(DB_URL,DatabaseStrings.USERNAME,DatabaseStrings.PASSWORD);
                 stmnt=conn.createStatement();
-                String sql="SELECT * FROM u2hdb.BoxTable where CategoryName='"+categoryClicked+"'";
+                String sql="SELECT * FROM u2hdb.BoxTable where GroupName='"+groupClicked+"' ORDER BY BoxNumber ASC";
                 ResultSet rs= stmnt.executeQuery(sql);
                 while(rs.next())
                 {
-                    boxList.add(rs.getString("BoxName"));
-                    Log.e("String",rs.getString("BoxName"));
+                    boxList.add(rs.getString("BoxNumber"));
+                    Log.e("String",rs.getString("BoxNumber"));
                 }
                 if(boxList.size()==0)
                 {

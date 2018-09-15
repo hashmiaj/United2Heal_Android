@@ -31,7 +31,7 @@ import java.util.HashSet;
 import java.util.List;
 
 public class BoxStatsMain extends Fragment {
-    private ArrayList<String> categoryList = new ArrayList<>();
+    private ArrayList<String> groupList = new ArrayList<>();
     ListView mainListView;
 
     @Nullable
@@ -55,7 +55,7 @@ public class BoxStatsMain extends Fragment {
                 Fragment fragment = new BoxStatsBoxes();
                 FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                 Bundle data = new Bundle();
-                data.putString("com.u2h.user.united2healandroid.SELECTED_CATEGORY", mainListView.getAdapter().getItem(i).toString());
+                data.putString("com.u2h.user.united2healandroid.SELECTED_GROUP", mainListView.getAdapter().getItem(i).toString());
                 fragment.setArguments(data);
                 fragmentTransaction.replace(R.id.MainFrame, fragment, "BoxList").addToBackStack(null);
                 ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Boxes");
@@ -74,7 +74,7 @@ public class BoxStatsMain extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Categories");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Groups");
 
 
     }
@@ -85,7 +85,7 @@ public class BoxStatsMain extends Fragment {
 
         @Override
         protected void onPreExecute() {
-            categoryList.clear();
+            groupList.clear();
         }
 
         @Override
@@ -99,17 +99,17 @@ public class BoxStatsMain extends Fragment {
                 String sql = "SELECT * FROM u2hdb.BoxTable";
                 ResultSet rs = stmnt.executeQuery(sql);
                 while (rs.next()) {
-                    categoryList.add(rs.getString("CategoryName"));
+                    groupList.add(rs.getString("GroupName"));
                 }
                 ArrayList<String> tempList = new ArrayList<>();
                 HashSet tempSet = new HashSet<>();
-                for (String s : categoryList) {
+                for (String s : groupList) {
                     if (!tempSet.contains(s)) {
                         tempSet.add(s);
                         tempList.add(s);
                     }
                 }
-                categoryList = tempList;
+                groupList = tempList;
                 rs.close();
                 stmnt.close();
                 conn.close();
@@ -137,9 +137,9 @@ public class BoxStatsMain extends Fragment {
 
         @Override
         protected void onPostExecute(String msg) {
-            String[] newList = new String[categoryList.size()];
+            String[] newList = new String[groupList.size()];
             if (getActivity() != null) {
-                CustomListAdapter listAdapter = new CustomListAdapter(getActivity(), categoryList.toArray(newList));
+                CustomListAdapter listAdapter = new CustomListAdapter(getActivity(), groupList.toArray(newList));
 
                 mainListView.setAdapter(listAdapter);
             }
