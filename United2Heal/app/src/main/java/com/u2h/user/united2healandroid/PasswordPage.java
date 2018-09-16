@@ -116,20 +116,16 @@ public class PasswordPage extends Fragment {
             {
                 Toast.makeText(getActivity(),"Success!",Toast.LENGTH_SHORT).show();
                 FragmentTransaction fragmentTransaction= getActivity().getSupportFragmentManager().beginTransaction();
-                Fragment fragment= new SearchItems();
+                Fragment fragment= new choose_group();
 
-                ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                        getActivity(), drawer,toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-                drawer.addDrawerListener(toggle);
-                toggle.syncState();
-                toggle.setDrawerIndicatorEnabled(true);
+
                 fragmentTransaction.replace(R.id.MainFrame,fragment);
                 fragmentTransaction.commit();
                 InputMethodManager inputManager = (InputMethodManager)
                         getActivity().getSystemService(INPUT_METHOD_SERVICE);
                 inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
                         InputMethodManager.HIDE_NOT_ALWAYS);
-                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Search Items");
+                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Pick Group");
             }
             else{
                 Toast.makeText(getActivity(),"Error, Try again",Toast.LENGTH_SHORT).show();
