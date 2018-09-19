@@ -1,6 +1,9 @@
 package com.u2h.user.united2healandroid;
 
+import android.graphics.Color;
 import android.os.AsyncTask;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +11,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,8 +23,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 
-public class ItemPage extends AppCompatActivity {
+public class ItemPage extends AppCompatActivity implements CalendarDialog.DialogListener{
     String itemCategory;
     String itemID;
     TextView groupNameTextView;
@@ -27,6 +33,10 @@ public class ItemPage extends AppCompatActivity {
     String selectedItem;
     Spinner itemBoxSpinner;
     Button submitButton;
+    CheckBox hasExpirationCheckBox;
+    String expirationDate="";
+    Boolean hasExpiration=false;
+    Boolean dateSet=false;
     String itemQuantity;
     String selectedBox;
     Boolean connectedToDB=false;
@@ -37,8 +47,38 @@ public class ItemPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_page);
         TextView itemNameTextView = (TextView) findViewById(R.id.itemNameTextView);
+        final CalendarDialog calendar= new CalendarDialog();
+        final Button expirationDateButton= (Button) findViewById(R.id.chooseExpirationDate);
+        expirationDateButton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager manager= getSupportFragmentManager();
+                calendar.show(manager,"");
+            }
+        });
         groupNameTextView = (TextView) findViewById(R.id.groupNameTextView);
         itemIdTextView = (TextView) findViewById(R.id.codeTextView);
+        hasExpirationCheckBox= (CheckBox) findViewById(R.id.expirationCheckBox);
+        hasExpirationCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b)
+                {
+                    expirationDateButton.setTextColor(Color.BLACK);
+                    hasExpiration=true;
+                    expirationDateButton.setEnabled(true);
+                }
+                else{
+                    expirationDateButton.setTextColor(getResources().getColor(R.color.darkerGray));
+                    hasExpiration=false;
+                    dateSet=false;
+                    expirationDateButton.setEnabled(false);
+                    expirationDate="";
+
+                }
+
+            }
+        });
         itemBoxSpinner = (Spinner) findViewById(R.id.itemBoxSpinner);
         submitButton = (Button) findViewById(R.id.submitButton);
         final TextView quantityTextView = (TextView) findViewById(R.id.quantityEdit);
@@ -61,6 +101,11 @@ public class ItemPage extends AppCompatActivity {
                 if(itemQuantity.equals("")) {
                     Toast.makeText(getApplicationContext(),"Error: Enter a quantity ",Toast.LENGTH_SHORT).show();
                 }
+                else if(!dateSet && hasExpiration)
+                {
+                    Toast.makeText(getApplicationContext(),"Error: Set Expiration Date ",Toast.LENGTH_SHORT).show();
+
+                }
                 else  {
                     PostData postData = new PostData();
                     postData.execute();
@@ -74,6 +119,18 @@ public class ItemPage extends AppCompatActivity {
         }
         GetData data = new GetData();
         data.execute();
+    }
+
+    @Override
+    public void onPositiveClick(CalendarDialog dialog) {
+        expirationDate=dialog.date;
+        dateSet=true;
+        Toast.makeText(this, "Expiration date set to "+dialog.date, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNegativeClick(CalendarDialog dialog) {
+
     }
 
     private class GetData extends AsyncTask<String, String, String> {
@@ -171,7 +228,7 @@ public class ItemPage extends AppCompatActivity {
 
                 }else {
                     sql = "INSERT INTO u2hdb.ItemBox\n" +
-                            "Values (" + random + ",'" + itemID + "','" + itemQuantity + "'," + selectedBox + ",'Test','" + selectedItem+"','"+((UserInfo)getApplication()).getGroupName() + "')";
+                            "Values (" + random + ",'" + itemID + "','" + itemQuantity + "'," + selectedBox + ",'Test','" + selectedItem+"','"+((UserInfo)getApplication()).getGroupName() + "','"+expirationDate+"')";
                     stmnt.executeUpdate(sql);
                     Log.e("REEEEEEEE","");
                 }
