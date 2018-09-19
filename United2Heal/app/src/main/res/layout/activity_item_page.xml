@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/datePicker" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
     <TextView
         android:id="@+id/itemQuantityHeader"
@@ -196,18 +196,35 @@
         app:layout_constraintTop_toBottomOf="@+id/itemBoxHeader"
         app:layout_constraintVertical_bias="0.048" />
 
-    <EditText
-        android:id="@+id/datePicker"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="date"
-        android:textSize="14sp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/expireDateHeader" />
+        app:layout_constraintTop_toBottomOf="@+id/expireDateHeader">
+
+        <Button
+            android:id="@+id/chooseExpirationDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:text="Set Expiration Date"
+            android:textColor="@color/darkerGray"
+            android:visibility="visible" />
+
+        <CheckBox
+            android:id="@+id/expirationCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Expiration Date"
+            android:textAlignment="textStart" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
