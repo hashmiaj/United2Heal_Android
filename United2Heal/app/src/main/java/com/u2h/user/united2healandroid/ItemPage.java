@@ -25,7 +25,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class ItemPage extends AppCompatActivity implements CalendarDialog.DialogListener{
+public class ItemPage extends AppCompatActivity implements CalendarDialog.DialogListener, ItemConfirmDialog.ConfirmDialogListener{
     String itemCategory;
     String itemID;
     TextView groupNameTextView;
@@ -34,7 +34,7 @@ public class ItemPage extends AppCompatActivity implements CalendarDialog.Dialog
     Spinner itemBoxSpinner;
     Button submitButton;
     CheckBox hasExpirationCheckBox;
-    String expirationDate="";
+    String expirationDate="No expiration date";
     Boolean hasExpiration=false;
     Boolean dateSet=false;
     String itemQuantity;
@@ -46,7 +46,7 @@ public class ItemPage extends AppCompatActivity implements CalendarDialog.Dialog
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_page);
-        TextView itemNameTextView = (TextView) findViewById(R.id.itemNameTextView);
+        final TextView itemNameTextView = (TextView) findViewById(R.id.itemNameTextView);
         final CalendarDialog calendar= new CalendarDialog();
         final Button expirationDateButton= (Button) findViewById(R.id.chooseExpirationDate);
         expirationDateButton.setOnClickListener(new Button.OnClickListener() {
@@ -73,7 +73,7 @@ public class ItemPage extends AppCompatActivity implements CalendarDialog.Dialog
                     hasExpiration=false;
                     dateSet=false;
                     expirationDateButton.setEnabled(false);
-                    expirationDate="";
+                    expirationDate="No expiration date";
 
                 }
 
@@ -107,8 +107,14 @@ public class ItemPage extends AppCompatActivity implements CalendarDialog.Dialog
 
                 }
                 else  {
-                    PostData postData = new PostData();
-                    postData.execute();
+                    ItemConfirmDialog dialog = new ItemConfirmDialog();
+                    Bundle bundle= new Bundle();
+                    bundle.putString("ITEM_NAME",itemNameTextView.getText().toString());
+                    bundle.putString("ITEM_QUANTITY",itemQuantity);
+                    bundle.putString("BOX_NUMBER",selectedBox);
+                    bundle.putString("EXPIRATION",expirationDate);
+                    dialog.setArguments(bundle);
+                    dialog.show(getSupportFragmentManager(),null);
                 }
             }
         });
@@ -131,6 +137,12 @@ public class ItemPage extends AppCompatActivity implements CalendarDialog.Dialog
     @Override
     public void onNegativeClick(CalendarDialog dialog) {
 
+    }
+
+    @Override
+    public void onConfirm() {
+        PostData data= new PostData();
+                data.execute();
     }
 
     private class GetData extends AsyncTask<String, String, String> {
