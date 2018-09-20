@@ -228,19 +228,19 @@ public class ItemPage extends AppCompatActivity implements CalendarDialog.Dialog
                 ArrayList<String> itemBoxEntries = new ArrayList<>();
                 ArrayList<Integer> itemBoxID = new ArrayList<>();
                 int random = (int) (Math.random() * 100000);
-                String sql = "Select Count(*) AS length from u2hdb.ItemBox where ItemName='" + selectedItem + "' AND BoxNumber='" + selectedBox + "' AND GroupName='"+((UserInfo)getApplication()).getGroupName()+"'";
+                String sql = "Select Count(*) AS length from u2hdb.ItemBox where ItemName='" + selectedItem + "' AND BoxNumber='" + selectedBox+ "' and ExpirationDate='"+expirationDate+"' and GroupName='"+((UserInfo)getApplication()).getGroupName()+"'";
                 ResultSet rs = stmnt.executeQuery(sql);
                 rs.next();
                 int count=rs.getInt("length");
                 rs.close();
                 if(count>0)
                 {
-                    sql="UPDATE u2hdb.ItemBox SET ItemQuantity=ItemQuantity+"+itemQuantity+" where ItemName='" + selectedItem + "' AND BoxNumber='" + selectedBox + "' and GroupName='"+((UserInfo)getApplication()).getGroupName()+"'";
+                    sql="UPDATE u2hdb.ItemBox SET ItemQuantity=ItemQuantity+"+itemQuantity+" where ItemName='" + selectedItem + "' AND BoxNumber='" + selectedBox + "' and ExpirationDate='"+expirationDate+"' and GroupName='"+((UserInfo)getApplication()).getGroupName()+"'";
                     stmnt.executeUpdate(sql);
 
                 }else {
                     sql = "INSERT INTO u2hdb.ItemBox\n" +
-                            "Values (" + random + ",'" + itemID + "','" + itemQuantity + "'," + selectedBox + ",'Test','" + selectedItem+"','"+((UserInfo)getApplication()).getGroupName() + "','"+expirationDate+"')";
+                            "Values (" + random + ",'" + itemID + "','" + itemQuantity + "'," + selectedBox + ",'" + selectedItem+"','"+((UserInfo)getApplication()).getGroupName() + "','"+expirationDate+"')";
                     stmnt.executeUpdate(sql);
                     Log.e("REEEEEEEE","");
                 }
