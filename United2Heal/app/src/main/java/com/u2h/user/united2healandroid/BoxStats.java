@@ -28,6 +28,7 @@ import java.util.ArrayList;
 public class BoxStats extends AppCompatActivity {
     private String selectedBox;
     private String selectedGroup;
+
     File csvFile;
     private TextView emptyTextView;
     private ArrayList<BoxStatsDataPoint> boxStats= new ArrayList<>();
@@ -74,9 +75,9 @@ public class BoxStats extends AppCompatActivity {
     {
         csvFile=new File(context.getExternalCacheDir().toString()+"/"+ selectedGroup +" Box "+selectedBox+".csv");
         CSVWriter csvWriter=new CSVWriter(new FileWriter(csvFile));
-        csvWriter.writeNext(new String[]{"ItemName","ItemQuantity"});
+        csvWriter.writeNext(new String[]{"ItemName","ItemQuantity","ExpirationDate"});
         for(int i=0; i<boxStats.size();i++) {
-            csvWriter.writeNext(new String[]{boxStats.get(i).getItemName(),boxStats.get(i).getQuantity()+""});
+            csvWriter.writeNext(new String[]{boxStats.get(i).getItemName(),boxStats.get(i).getQuantity()+"",boxStats.get(i).getExpirationDate()});
         }
         csvWriter.close();
         emailCSV();
@@ -106,7 +107,7 @@ public class BoxStats extends AppCompatActivity {
                 ResultSet rs=stmnt.executeQuery(sql);
                 while(rs.next())
                 {
-                    BoxStatsDataPoint itemData=new BoxStatsDataPoint(rs.getString("ItemName"),rs.getInt("ItemQuantity"));
+                    BoxStatsDataPoint itemData=new BoxStatsDataPoint(rs.getString("ItemName"),rs.getInt("ItemQuantity"),rs.getString("ExpirationDate"));
                     boxStats.add(itemData);
 
                 }
