@@ -38,7 +38,7 @@ public class BoxStatsListAdapter extends BaseAdapter{
         TextView itemNameTextView=v.findViewById(R.id.itemNameTextView);
         TextView quantitiyTextView=v.findViewById(R.id.quantityTextView);
         itemNameTextView.setText(dataArray.get(i).getItemName());
-        quantitiyTextView.setText(dataArray.get(i).getQuantity()+"x");
+        quantitiyTextView.setText("x"+dataArray.get(i).getQuantity());
 
         return v;
     }
