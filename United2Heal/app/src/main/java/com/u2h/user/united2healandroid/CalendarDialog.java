@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CalendarView;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -33,17 +34,21 @@ public class CalendarDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
+        Date defualt=Calendar.getInstance().getTime();
+        SimpleDateFormat df= new SimpleDateFormat("M/d/yyyy");
+        date=df.format(defualt);
+            AlertDialog.Builder builder= new AlertDialog.Builder(getActivity());
         LayoutInflater inflater= getActivity().getLayoutInflater();
         final View view=inflater.inflate(R.layout.calendar_dialog,null);
          CalendarView calendar= view.findViewById(R.id.calendarView);
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
-                date=month+"/"+day+"/"+year;
+                date=(month+1)+"/"+day+"/"+year;
 
             }
         });
+
         builder.setView(view).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
