@@ -1,6 +1,7 @@
 package com.u2h.user.united2healandroid;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -83,6 +84,8 @@ public class PasswordPage extends Fragment {
                     if(password.equals(passVal))
                     {
                         success=true;
+                        ((UserInfo)getActivity().getApplication()).setPassword(password);
+
                     }
                 }
                 stmnt.close();
@@ -126,6 +129,8 @@ public class PasswordPage extends Fragment {
                 inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
                         InputMethodManager.HIDE_NOT_ALWAYS);
                 ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Pick Group");
+                Intent service= new Intent(getActivity().getApplicationContext(),CheckPassword.class);
+                getActivity().startService(service);
             }
             else{
                 Toast.makeText(getActivity(),"Error, Try again",Toast.LENGTH_SHORT).show();

@@ -53,7 +53,7 @@
             android:name=".BoxStats"
             android:label="Box Details"
             android:screenOrientation="portrait" />
-        <activity android:name=".choose_group"></activity>
+        <service android:name=".CheckPassword"></service>
     </application>
 
 </manifest>
