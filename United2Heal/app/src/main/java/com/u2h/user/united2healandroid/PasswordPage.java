@@ -36,6 +36,7 @@ public class PasswordPage extends Fragment {
     Toolbar toolbar;
     Button passwordButton;
     String passVal;
+    UserInfo application;
     DrawerLayout drawer;
 
     @Nullable
@@ -46,6 +47,8 @@ public class PasswordPage extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        application=((UserInfo)getActivity().getApplication());
+
         drawer= (DrawerLayout) getActivity().findViewById(R.id.drawer_layout);
         toolbar=(Toolbar) getActivity().findViewById(R.id.toolbar);
         passwordTextView= (TextView) view.findViewById(R.id.passwordTextView);
@@ -84,7 +87,7 @@ public class PasswordPage extends Fragment {
                     if(password.equals(passVal))
                     {
                         success=true;
-                        ((UserInfo)getActivity().getApplication()).setPassword(password);
+                        application.setPassword(password);
 
                     }
                 }
@@ -117,20 +120,21 @@ public class PasswordPage extends Fragment {
         {
             if(success)
             {
-                Toast.makeText(getActivity(),"Success!",Toast.LENGTH_SHORT).show();
-                FragmentTransaction fragmentTransaction= getActivity().getSupportFragmentManager().beginTransaction();
-                Fragment fragment= new choose_group();
+                if(getActivity()!=null) {
+                    Toast.makeText(getActivity(), "Success!", Toast.LENGTH_SHORT).show();
+                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    Fragment fragment = new choose_group();
 
-
-                fragmentTransaction.replace(R.id.MainFrame,fragment);
-                fragmentTransaction.commit();
-                InputMethodManager inputManager = (InputMethodManager)
-                        getActivity().getSystemService(INPUT_METHOD_SERVICE);
-                inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
-                        InputMethodManager.HIDE_NOT_ALWAYS);
-                ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Pick Group");
-                Intent service= new Intent(getActivity().getApplicationContext(),CheckPassword.class);
-                getActivity().startService(service);
+                    fragmentTransaction.replace(R.id.MainFrame, fragment);
+                    fragmentTransaction.commit();
+                    InputMethodManager inputManager = (InputMethodManager)
+                            getActivity().getSystemService(INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
+                            InputMethodManager.HIDE_NOT_ALWAYS);
+                    ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Pick Group");
+                    Intent service = new Intent(getActivity().getApplicationContext(), CheckPassword.class);
+                    getActivity().startService(service);
+                }
             }
             else{
                 Toast.makeText(getActivity(),"Error, Try again",Toast.LENGTH_SHORT).show();

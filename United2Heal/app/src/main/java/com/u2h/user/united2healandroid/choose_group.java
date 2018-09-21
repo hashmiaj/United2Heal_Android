@@ -55,6 +55,8 @@ Toolbar toolbar;
                     ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                             getActivity(), drawer,toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
                     drawer.addDrawerListener(toggle);
+                    drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+
                     toggle.syncState();
                     toggle.setDrawerIndicatorEnabled(true);
                     fragmentTransaction.replace(R.id.MainFrame,fragment);
