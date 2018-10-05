@@ -3,6 +3,7 @@ package com.u2h.user.united2healandroid;
 import android.app.Application;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
@@ -16,15 +17,18 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
+
+import org.w3c.dom.Text;
 
 public class choose_group extends Fragment {
 String[] groupList={"","A","B","C","D","E","F","G","H","I","J","K","L"};
 Spinner groupSpinner;
 DrawerLayout drawer;
 Toolbar toolbar;
-
+NavigationView navigationView;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,6 +42,10 @@ Toolbar toolbar;
 
         super.onViewCreated(view, savedInstanceState);
         Button submit= (Button) view.findViewById(R.id.submitGroupButton);
+        navigationView=(NavigationView) getActivity().findViewById(R.id.nav_view);
+        int count=navigationView.getHeaderCount();
+        final View headerView= navigationView.getHeaderView(0);
+        final TextView headerTextView= headerView.findViewById(R.id.headerTextView);
         submit.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,7 +64,7 @@ Toolbar toolbar;
                             getActivity(), drawer,toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
                     drawer.addDrawerListener(toggle);
                     drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-
+                    headerTextView.setText("Group "+((UserInfo)getActivity().getApplication()).getGroupName());
                     toggle.syncState();
                     toggle.setDrawerIndicatorEnabled(true);
                     fragmentTransaction.replace(R.id.MainFrame,fragment);
