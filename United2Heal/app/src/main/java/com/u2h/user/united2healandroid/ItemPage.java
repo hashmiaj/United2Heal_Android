@@ -34,7 +34,7 @@ public class ItemPage extends AppCompatActivity implements CalendarDialog.Dialog
     Spinner itemBoxSpinner;
     Button submitButton;
     CheckBox hasExpirationCheckBox;
-    String expirationDate="No expiration date";
+    String expirationDate="None";
     Boolean hasExpiration=false;
     Boolean dateSet=false;
     String itemQuantity;
@@ -73,7 +73,7 @@ public class ItemPage extends AppCompatActivity implements CalendarDialog.Dialog
                     hasExpiration=false;
                     dateSet=false;
                     expirationDateButton.setEnabled(false);
-                    expirationDate="No expiration date";
+                    expirationDate="None";
 
                 }
 
