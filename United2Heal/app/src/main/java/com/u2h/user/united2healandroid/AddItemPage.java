@@ -205,7 +205,7 @@ public class AddItemPage extends Fragment {
              if(!duplicate)
              {
                  sql="INSERT INTO u2hdb.ItemTable \n"+
-                         "values ("+code+",'','"+itemName+"')";
+                         "values ("+code+",'"+itemName+"')";
                  stmnt.executeUpdate(sql);
              }
              success=true;

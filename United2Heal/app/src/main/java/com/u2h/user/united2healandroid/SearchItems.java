@@ -28,6 +28,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class SearchItems extends Fragment {
     ListView list;
@@ -168,6 +170,12 @@ itemList.clear();
         @Override
         protected void onPostExecute(String msg) {
             String[] newList = new String[itemList.size()];
+            java.util.Collections.sort(itemList, new Comparator<String>() {
+                @Override
+                public int compare(String s1, String s2){
+                    return s1.compareToIgnoreCase(s2);
+                }
+            });
             CustomListAdapter listAdapter = new CustomListAdapter(getContext(), itemList.toArray(newList));
             list.setAdapter(listAdapter);
             if (isEmpty) {
