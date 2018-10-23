@@ -29,12 +29,19 @@ Fragment fragmentCurrent;
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
+        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        toggle.setDrawerIndicatorEnabled(false);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //Display search menu as default page for now
-        DisplayFrame(R.id.nav_search_items);
+        Fragment fragment= new choose_group();
+        getSupportActionBar().setTitle("Choose Group");
+        FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.MainFrame,fragment);
+        fragmentTransaction.commit();
+
     }
 
     @Override

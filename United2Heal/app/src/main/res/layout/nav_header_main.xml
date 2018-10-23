@@ -25,26 +25,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-<<<<<<< HEAD
-        android:text="Admin"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="@color/white" />
-=======
         android:text="Default User"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/white"
         android:textSize="24sp" />
->>>>>>> 2fec9fa... Displays group in navbar
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
-<<<<<<< HEAD
-        android:layout_height="wrap_content" />
-=======
         android:layout_height="wrap_content"
         android:text="No admin privilege"
         android:textColor="@color/white" />
->>>>>>> 2fec9fa... Displays group in navbar
 
 </LinearLayout>
