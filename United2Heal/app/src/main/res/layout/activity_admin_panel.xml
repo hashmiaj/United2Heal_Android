@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminPanel">
+    >
 
     <TextView
         android:id="@+id/textView2"
@@ -81,16 +85,18 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <Spinner
-            android:id="@+id/categorySpinner"
+            android:id="@+id/groupSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:spinnerMode="dialog" />
 
         <Spinner
-            android:id="@+id/boxSpinner"
+            android:id="@+id/boxNumberSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:spinnerMode="dialog" />
 
     </LinearLayout>
 
@@ -122,3 +128,4 @@
             android:text="Close Box" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
+</ScrollView>
