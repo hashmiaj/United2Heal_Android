@@ -34,7 +34,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No admin privilege"
+        android:text="Admin"
         android:textColor="@color/white" />
 
 </LinearLayout>
