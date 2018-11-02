@@ -1,34 +1,24 @@
 package com.u2h.user.united2healandroid;
 
 public class Item {
-    private String itemCategory;
     private int itemID;
     private String itemName;
     private int itemQuantity;
 
     public Item(String itemCategory, int itemID, String itemName, int itemQuantity, String itemBox) {
-        this.itemCategory = itemCategory;
         this.itemID = itemID;
         this.itemName = itemName;
         this.itemQuantity = itemQuantity;
         this.itemBox = itemBox;
     }
-    public Item(String itemCategory,int itemID,String itemName)
+    public Item(int itemID,String itemName)
     {
-        this.itemCategory=itemCategory;
         this.itemID=itemID;
         this.itemName=itemName;
     }
 
     private String itemBox;
 
-    public String getItemCategory() {
-        return itemCategory;
-    }
-
-    public void setItemCategory(String itemCategory) {
-        this.itemCategory = itemCategory;
-    }
 
     public int getItemID() {
         return itemID;

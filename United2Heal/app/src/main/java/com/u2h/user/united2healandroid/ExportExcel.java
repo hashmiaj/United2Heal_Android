@@ -65,10 +65,10 @@ public class ExportExcel extends Fragment {
         {
             File file=new File(getContext().getExternalCacheDir().toString()+"/database.csv");
             CSVWriter writer= new CSVWriter(new FileWriter(file));
-            writer.writeNext(new String[]{"ItemID","ItemCategory","ItemName"});
+            writer.writeNext(new String[]{"ItemID","ItemName"});
             for(Item i:itemList)
             {
-                writer.writeNext(new String[]{Integer.toString(i.getItemID()),i.getItemCategory(),i.getItemName()});
+                writer.writeNext(new String[]{Integer.toString(i.getItemID()),i.getItemName()});
 
             }
             writer.close();
@@ -116,9 +116,8 @@ public class ExportExcel extends Fragment {
                 {
                     int itemId=rs.getInt("ItemID");
                     String itemName=rs.getString("ItemName");
-                    String itemCategory=rs.getString("CategoryName");
 
-                    itemList.add(new Item(itemCategory,itemId,itemName));
+                    itemList.add(new Item(itemId,itemName));
 
                 }
 
