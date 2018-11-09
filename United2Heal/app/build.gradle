@@ -6,14 +6,18 @@ android {
         applicationId "com.u2h.user.united2healandroid"
         minSdkVersion 21
         targetSdkVersion 28
+<<<<<<< HEAD
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         versionName '1.7'
+=======
+        versionName '1.8'
+>>>>>>> 36296f2... Bug Fixes
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
-        versionCode 7
+        versionCode 8
     }
     buildTypes {
         release {

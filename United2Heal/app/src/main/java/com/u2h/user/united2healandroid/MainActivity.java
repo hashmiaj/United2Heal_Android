@@ -91,6 +91,7 @@ Fragment fragmentCurrent;
     //Handles main navigation between fragments
     public void DisplayFrame(int id)
     {
+        ((UserInfo)getApplication()).allowAsync=false;
         Fragment fragment = null;
         //Create fragment based off of id of clicked navigation item
         switch(id){

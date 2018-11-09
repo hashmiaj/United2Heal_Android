@@ -43,6 +43,7 @@ public class BoxStatsMain extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ((UserInfo)getActivity().getApplication()).allowAsync=true;
         GetData retrieveData = new GetData();
         retrieveData.execute();
         mainListView = (ListView) view.findViewById(R.id.boxStatsListView);
@@ -137,12 +138,17 @@ public class BoxStatsMain extends Fragment {
 
         @Override
         protected void onPostExecute(String msg) {
-            String[] newList = new String[groupList.size()];
-            if (getActivity() != null) {
-                CustomListAdapter listAdapter = new CustomListAdapter(getActivity(), groupList.toArray(newList));
+            if(getActivity()!=null){
+                if (((UserInfo) getActivity().getApplication()).allowAsync) {
 
-                mainListView.setAdapter(listAdapter);
+                    String[] newList = new String[groupList.size()];
+                    if (getActivity() != null) {
+                        CustomListAdapter listAdapter = new CustomListAdapter(getActivity(), groupList.toArray(newList));
+
+                        mainListView.setAdapter(listAdapter);
+                    }
+                }
             }
-        }
+    }
     }
 }

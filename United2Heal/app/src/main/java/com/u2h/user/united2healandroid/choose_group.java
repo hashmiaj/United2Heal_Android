@@ -24,7 +24,7 @@ import android.support.v7.widget.Toolbar;
 import org.w3c.dom.Text;
 
 public class choose_group extends Fragment {
-String[] groupList={"","A","B","C","D","E","F","G","H","I","J","K","L"};
+String[] groupList={"","A","B","C","D","E","F","G","H","I","J"};
 Spinner groupSpinner;
 DrawerLayout drawer;
 Toolbar toolbar;
