@@ -50,6 +50,8 @@ public class SearchItems extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ((UserInfo)getActivity().getApplication()).allowAsync=true;
+
         GetData data= new GetData();
         data.execute();
         emptyTextView = (TextView) getView().findViewById(R.id.empty);
@@ -169,18 +171,24 @@ itemList.clear();
 
         @Override
         protected void onPostExecute(String msg) {
-            String[] newList = new String[itemList.size()];
-            java.util.Collections.sort(itemList, new Comparator<String>() {
-                @Override
-                public int compare(String s1, String s2){
-                    return s1.compareToIgnoreCase(s2);
+            if(getActivity()!=null){
+
+                if (((UserInfo) getActivity().getApplication()).allowAsync) {
+
+                String[] newList = new String[itemList.size()];
+                java.util.Collections.sort(itemList, new Comparator<String>() {
+                    @Override
+                    public int compare(String s1, String s2) {
+                        return s1.compareToIgnoreCase(s2);
+                    }
+                });
+                CustomListAdapter listAdapter = new CustomListAdapter(getContext(), itemList.toArray(newList));
+                list.setAdapter(listAdapter);
+                if (isEmpty) {
+                    emptyTextView.setText("No Items");
                 }
-            });
-            CustomListAdapter listAdapter = new CustomListAdapter(getContext(), itemList.toArray(newList));
-            list.setAdapter(listAdapter);
-            if (isEmpty) {
-                emptyTextView.setText("No Items");
             }
+        }
         }
     }
 }

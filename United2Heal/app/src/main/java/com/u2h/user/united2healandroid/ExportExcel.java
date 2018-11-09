@@ -46,8 +46,9 @@ public class ExportExcel extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        Log.e("itemList Length",itemList.size()+"");
         super.onViewCreated(view, savedInstanceState);
+        ((UserInfo)getActivity().getApplication()).allowAsync=true;
+
         enterEmailTextView= (TextView) view.findViewById(R.id.enterEmailTextView);
         progressTextView=(TextView) view.findViewById(R.id.progressTextView);
         Button getDataButton= (Button) view.findViewById(R.id.exportExcelButton);
@@ -159,9 +160,11 @@ msg=connError.getMessage();
         }
         @Override
         protected void onPostExecute(String msg)
-        {
-            if(progressTextView!=null)
-            progressTextView.setText(this.msg);
+        {            if (((UserInfo) getActivity().getApplication()).allowAsync) {
+
+            if (progressTextView != null)
+                progressTextView.setText(this.msg);
+        }
         }
     }
 }

@@ -87,6 +87,7 @@ DrawerLayout drawer=(DrawerLayout) findViewById(R.id.drawer_layout);
     //Handles main navigation between fragments
     public void DisplayFrame(int id)
     {
+        ((UserInfo)getApplication()).allowAsync=false;
         Fragment fragment = null;
         //Create fragment based off of id of clicked navigation item
         switch(id){

@@ -5,6 +5,7 @@ import android.app.Application;
 public class UserInfo extends Application {
     private String groupName="B";
     private String password="";
+    public Boolean allowAsync=true;
 
     public String getPassword() {
         return password;

@@ -35,6 +35,7 @@ public class BoxStatsBoxes extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ((UserInfo)getActivity().getApplication()).allowAsync=true;
         GetData retrieveData=new GetData();
         retrieveData.execute();
 

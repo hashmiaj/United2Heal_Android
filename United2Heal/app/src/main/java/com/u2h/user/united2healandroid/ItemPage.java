@@ -240,7 +240,8 @@ public class ItemPage extends AppCompatActivity implements CalendarDialog.Dialog
 
                 }else {
                     sql = "INSERT INTO u2hdb.ItemBox\n" +
-                            "Values (" + random + ",'" + itemID + "','" + itemQuantity + "'," + selectedBox + ",'" + selectedItem+"','"+((UserInfo)getApplication()).getGroupName() + "','"+expirationDate+"')";
+                            "Values (" + random + ",'" + itemID + "','"+((UserInfo)getApplication()).getGroupName()+"','"+ selectedBox +  "','"+selectedItem + "','" + itemQuantity+"','"+expirationDate+"')";
+                    Log.e("QUERY", "Values (" + random + "," + itemID + ",'"+((UserInfo)getApplication()).getGroupName()+"',"+ selectedBox +  ","+selectedItem + "," + itemQuantity+",'"+expirationDate+"')");
                     stmnt.executeUpdate(sql);
                     Log.e("REEEEEEEE","");
                 }

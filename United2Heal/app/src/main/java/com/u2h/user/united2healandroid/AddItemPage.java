@@ -72,6 +72,8 @@ public class AddItemPage extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ((UserInfo)getActivity().getApplication()).allowAsync=true;
+
         //itemCategorySpinner=(Spinner)view.findViewById(R.id.itemCategorySpinner);
         codeInputTextView=(TextView) view.findViewById(R.id.itemCodeInput);
         nameInputTextView=(TextView) view.findViewById(R.id.itemNameInput);
@@ -242,7 +244,9 @@ public class AddItemPage extends Fragment {
         @Override
         protected void onPostExecute(String msg)
         {
-            if(duplicate)
+            if(getActivity()!=null){
+
+                if(duplicate)
             {Toast.makeText(getActivity(),"Error, item name already exists",Toast.LENGTH_SHORT).show();
 
             }
@@ -261,6 +265,7 @@ public class AddItemPage extends Fragment {
                 Toast.makeText(getActivity(),"Failed to add",Toast.LENGTH_SHORT).show();
 
             }
+        }
         }
     }
 

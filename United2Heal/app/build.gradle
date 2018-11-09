@@ -11,10 +11,10 @@ android {
         applicationId "com.u2h.user.united2healandroid"
         minSdkVersion 21
         targetSdkVersion 28
-        versionName '1.7'
+        versionName '1.8'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
-        versionCode 7
+        versionCode 8
     }
     buildTypes {
         release {
