@@ -132,8 +132,7 @@ public class PasswordPage extends Fragment {
                     inputManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(),
                             InputMethodManager.HIDE_NOT_ALWAYS);
                     ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Pick Group");
-                    Intent service = new Intent(getActivity().getApplicationContext(), CheckPassword.class);
-                    getActivity().startService(service);
+
                 }
             }
             else{
