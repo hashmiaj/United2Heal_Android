@@ -49,6 +49,8 @@ public class SearchItems extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Search Items");
+
         super.onViewCreated(view, savedInstanceState);
         ((UserInfo)getActivity().getApplication()).allowAsync=true;
 
@@ -98,12 +100,13 @@ public class SearchItems extends Fragment {
                 for (String i : newList)
                     Log.i("name", i);
 
-                CustomListAdapter newListAdapter = new CustomListAdapter(getActivity(), newList);
-                list.setAdapter(newListAdapter);
-                if(newListAdapter.getCount()==0)
-                {
-                    emptyTextView.setText("No items match your search");
-                }
+if(getActivity()!=null) {
+    CustomListAdapter newListAdapter = new CustomListAdapter(getActivity(), newList);
+    list.setAdapter(newListAdapter);
+    if (newListAdapter.getCount() == 0) {
+        emptyTextView.setText("No items match your search");
+    }
+}
                 return true;
             }
 
