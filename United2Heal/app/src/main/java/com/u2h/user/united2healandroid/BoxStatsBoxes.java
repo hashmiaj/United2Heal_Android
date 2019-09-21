@@ -71,7 +71,7 @@ public class BoxStatsBoxes extends Fragment {
                 Class.forName(JDBC_DRIVER);
                 conn= DriverManager.getConnection(DB_URL,DatabaseStrings.USERNAME,DatabaseStrings.PASSWORD);
                 stmnt=conn.createStatement();
-                String sql="SELECT * FROM u2hdb.BoxTable where GroupName='"+groupClicked+"' ORDER BY BoxNumber ASC";
+                String sql="SELECT * FROM u2hdb.BoxTable where GroupName='"+groupClicked+"' and School='"+((UserInfo)getActivity().getApplication()).getSchoolName()+"' ORDER BY BoxNumber ASC";
                 ResultSet rs= stmnt.executeQuery(sql);
                 while(rs.next())
                 {

@@ -92,10 +92,9 @@ DrawerLayout drawer=(DrawerLayout) findViewById(R.id.drawer_layout);
         //Create fragment based off of id of clicked navigation item
         switch(id){
             case 0:
-                fragment=new PasswordPage();
-                getSupportActionBar().setTitle("Enter Password");
+                fragment=new ChooseSchool();
+                getSupportActionBar().setTitle("Choose School");
                 break;
-
             case R.id.nav_search_items:
                 fragment=new SearchItems();
                 getSupportActionBar().setTitle("Search Items");

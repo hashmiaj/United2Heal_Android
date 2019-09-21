@@ -33,7 +33,7 @@ import java.util.List;
 public class BoxStatsMain extends Fragment {
     private ArrayList<String> groupList = new ArrayList<>();
     ListView mainListView;
-
+    String schoolName;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -44,6 +44,7 @@ public class BoxStatsMain extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ((UserInfo)getActivity().getApplication()).allowAsync=true;
+        schoolName=((UserInfo)getActivity().getApplication()).getSchoolName();
         GetData retrieveData = new GetData();
         retrieveData.execute();
         mainListView = (ListView) view.findViewById(R.id.boxStatsListView);
@@ -97,7 +98,7 @@ public class BoxStatsMain extends Fragment {
                 Class.forName(JDBC_DRIVER);
                 conn = DriverManager.getConnection(DB_URL, DatabaseStrings.USERNAME, DatabaseStrings.PASSWORD);
                 stmnt = conn.createStatement();
-                String sql = "SELECT * FROM u2hdb.BoxTable";
+                String sql = "SELECT * FROM u2hdb.BoxTable WHERE School='"+schoolName+"'";
                 ResultSet rs = stmnt.executeQuery(sql);
                 while (rs.next()) {
                     groupList.add(rs.getString("GroupName"));

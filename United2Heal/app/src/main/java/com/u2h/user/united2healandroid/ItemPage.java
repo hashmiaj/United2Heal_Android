@@ -38,6 +38,7 @@ public class ItemPage extends AppCompatActivity implements CalendarDialog.Dialog
     Boolean hasExpiration=false;
     Boolean dateSet=false;
     String itemQuantity;
+    String schoolName;
     String selectedBox;
     Boolean connectedToDB=false;
     ArrayList<String> boxList = new ArrayList<>();
@@ -46,6 +47,7 @@ public class ItemPage extends AppCompatActivity implements CalendarDialog.Dialog
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_page);
+        schoolName=((UserInfo)getApplication()).getSchoolName();
         final TextView itemNameTextView = (TextView) findViewById(R.id.itemNameTextView);
         final CalendarDialog calendar= new CalendarDialog();
         final Button expirationDateButton= (Button) findViewById(R.id.chooseExpirationDate);
@@ -167,7 +169,7 @@ public class ItemPage extends AppCompatActivity implements CalendarDialog.Dialog
                 while (rs.next()) {
                     itemID = rs.getInt("ItemID") + "";
                 }
-                sql = "Select * from u2hdb.BoxTable WHERE IsOpen=1 and GroupName='" + ((UserInfo)getApplication()).getGroupName() + "' ORDER BY BoxNumber ASC";
+                sql = "Select * from u2hdb.BoxTable WHERE IsOpen=1 and GroupName='" + ((UserInfo)getApplication()).getGroupName() + "' and School='"+schoolName+"' ORDER BY BoxNumber ASC";
                 rs = stmnt.executeQuery(sql);
                 while (rs.next()) {
                     boxList.add(rs.getString("BoxNumber"));
@@ -228,22 +230,24 @@ public class ItemPage extends AppCompatActivity implements CalendarDialog.Dialog
                 ArrayList<String> itemBoxEntries = new ArrayList<>();
                 ArrayList<Integer> itemBoxID = new ArrayList<>();
                 int random = (int) (Math.random() * 100000);
-                String sql = "Select Count(*) AS length from u2hdb.ItemBox where ItemName='" + selectedItem + "' AND BoxNumber='" + selectedBox+ "' and ExpirationDate='"+expirationDate+"' and GroupName='"+((UserInfo)getApplication()).getGroupName()+"'";
+                String sql = "Select Count(*) AS length from u2hdb.ItemBox where ItemName='" + selectedItem + "' AND BoxNumber='" + selectedBox+ "' and ExpirationDate='"+expirationDate+"' and GroupName='"+((UserInfo)getApplication()).getGroupName()+"' and School='"+schoolName+"'";
                 ResultSet rs = stmnt.executeQuery(sql);
                 rs.next();
                 int count=rs.getInt("length");
                 rs.close();
                 if(count>0)
                 {
-                    sql="UPDATE u2hdb.ItemBox SET ItemQuantity=ItemQuantity+"+itemQuantity+" where ItemName='" + selectedItem + "' AND BoxNumber='" + selectedBox + "' and ExpirationDate='"+expirationDate+"' and GroupName='"+((UserInfo)getApplication()).getGroupName()+"'";
+                    sql="UPDATE u2hdb.ItemBox SET ItemQuantity=ItemQuantity+"+itemQuantity+" where ItemName='" + selectedItem + "' AND BoxNumber='" + selectedBox + "' and ExpirationDate='"+expirationDate+"' and GroupName='"+((UserInfo)getApplication()).getGroupName()+"' and School='"+schoolName+"'";
                     stmnt.executeUpdate(sql);
 
                 }else {
+                    sql = "Select MAX(ItemBoxID) AS max from u2hdb.ItemBox";
+                    rs=stmnt.executeQuery(sql);
+                    rs.next();
+                    int id=rs.getInt("max")+1;
                     sql = "INSERT INTO u2hdb.ItemBox\n" +
-                            "Values (" + random + ",'" + itemID + "','"+((UserInfo)getApplication()).getGroupName()+"','"+ selectedBox +  "','"+selectedItem + "','" + itemQuantity+"','"+expirationDate+"')";
-                    Log.e("QUERY", "Values (" + random + "," + itemID + ",'"+((UserInfo)getApplication()).getGroupName()+"',"+ selectedBox +  ","+selectedItem + "," + itemQuantity+",'"+expirationDate+"')");
+                            "Values (" + id + ",'" + itemID + "','"+((UserInfo)getApplication()).getGroupName()+"','"+ selectedBox +  "','"+selectedItem + "','" + itemQuantity+"','"+expirationDate+"','"+schoolName+"')";
                     stmnt.executeUpdate(sql);
-                    Log.e("REEEEEEEE","");
                 }
                 conn.close();
                 stmnt.close();

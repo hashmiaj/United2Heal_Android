@@ -3,7 +3,9 @@ package com.u2h.user.united2healandroid;
 import android.app.Application;
 
 public class UserInfo extends Application {
-    private String groupName="B";
+    private String groupName="";
+
+    private String schoolName="";
     private String password="";
     public Boolean allowAsync=true;
 
@@ -22,4 +24,13 @@ public class UserInfo extends Application {
     public void setGroupName(String groupName) {
         this.groupName = groupName;
     }
+
+    public String getSchoolName() {
+        return schoolName;
+    }
+
+    public void setSchoolName(String schoolName) {
+        this.schoolName = schoolName;
+    }
+
 }

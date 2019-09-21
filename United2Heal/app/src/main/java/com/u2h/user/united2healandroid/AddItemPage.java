@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,7 +60,6 @@ public class AddItemPage extends Fragment {
     TextView codeInputTextView;
 
     String itemName;
-    String code;
     String categoryName;
 
     Boolean connectedToDB=false;
@@ -75,9 +75,7 @@ public class AddItemPage extends Fragment {
         ((UserInfo)getActivity().getApplication()).allowAsync=true;
 
         //itemCategorySpinner=(Spinner)view.findViewById(R.id.itemCategorySpinner);
-        codeInputTextView=(TextView) view.findViewById(R.id.itemCodeInput);
         nameInputTextView=(TextView) view.findViewById(R.id.itemNameInput);
-        generateCodeButton=(Button) view.findViewById(R.id.generateCodeButton);
         /*itemCategorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -93,28 +91,16 @@ public class AddItemPage extends Fragment {
         submitItemButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                code=codeInputTextView.getText().toString();
                 itemName = nameInputTextView.getText().toString();
                 if(itemName.equals(""))
                 {
                     Toast.makeText(getActivity(),"Error: Enter a Name",Toast.LENGTH_SHORT).show();
 
                 }
-                else if(!StringUtils.isNumeric(code) ) {
-                    Toast.makeText(getActivity(), "Error: Invalid Code", Toast.LENGTH_SHORT).show();
-
-                }
                 else{
                     PostData data = new PostData();
                     data.execute();
                 }
-            }
-        });
-        generateCodeButton.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int rand= (int)(Math.random()*100000);
-                codeInputTextView.setText(String.valueOf(rand));
             }
         });
         /*GetData data= new GetData();
@@ -187,25 +173,23 @@ public class AddItemPage extends Fragment {
             try{
                 Class.forName(DatabaseStrings.JDBC_DRIVER);
                 conn=DriverManager.getConnection(DatabaseStrings.DB_URL, DatabaseStrings.USERNAME,DatabaseStrings.PASSWORD);
-                String sql="Select * from u2hdb.ItemTable";
+                String sql="Select * from u2hdb.ItemTable WHERE ItemName='"+itemName+"'";
                 stmnt=conn.createStatement();
                 ResultSet rs=stmnt.executeQuery(sql);
                 ArrayList<String> existingNames=new ArrayList<>();
-                while(rs.next())
-                {
-                    existingNames.add(rs.getString("ItemName").toLowerCase());
-                }
+               if(rs.next()){
+                   duplicate=true;
+               }
                 rs.close();
-             for(String s:existingNames)
-             {
-                 if(s.toLowerCase().equals(itemName.toLowerCase()))
-                 {
-                     duplicate=true;
+                sql="Select MAX(ItemID) AS max from u2hdb.ItemTable";
+                rs=stmnt.executeQuery(sql);
+                rs.next();
+                int code=rs.getInt("max")+1;
 
-                 }
-             }
              if(!duplicate)
              {
+
+                 Log.e("Code",code+"");
                  sql="INSERT INTO u2hdb.ItemTable \n"+
                          "values ("+code+",'"+itemName+"')";
                  stmnt.executeUpdate(sql);
@@ -258,7 +242,6 @@ public class AddItemPage extends Fragment {
             else if(success){
                 Toast.makeText(getActivity(),"Succes! Added Item",Toast.LENGTH_SHORT).show();
                 nameInputTextView.setText("");
-                codeInputTextView.setText("");
             }
             else if(!success)
             {
