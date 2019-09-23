@@ -77,7 +77,7 @@ public class ToggleBoxDialog extends DialogFragment {
                 Class.forName(DatabaseStrings.JDBC_DRIVER);
                 conn= DriverManager.getConnection(DatabaseStrings.DB_URL,DatabaseStrings.USERNAME,DatabaseStrings.PASSWORD);
                 stmnt=conn.createStatement();
-                String sql="SELECT * from u2hdb.PasswordTable WHERE School='"+((UserInfo)getActivity().getApplication()).getSchoolName()+"'";
+                String sql="SELECT * from u2hdb.PasswordTable WHERE IsAdmin=1 and School='"+((UserInfo)getActivity().getApplication()).getSchoolName()+"'";
                 ResultSet rs=stmnt.executeQuery(sql);
                 while (rs.next())
                 {

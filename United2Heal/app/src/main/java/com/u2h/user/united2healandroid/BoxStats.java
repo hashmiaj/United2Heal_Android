@@ -62,17 +62,7 @@ public class BoxStats extends AppCompatActivity implements  ToggleBoxDialog.Togg
             GetData data = new GetData();
             data.execute();
         }
-        boxOpenOrCloseButton.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DialogFragment confirm = new ToggleBoxDialog();
-                Bundle bundle = new Bundle();
-                bundle.putInt("BoxID", boxID);
-                bundle.putInt("IsBoxOpen", isBoxOpen);
-                confirm.setArguments(bundle);
-                confirm.show(getSupportFragmentManager(), "confirm");
-            }
-        });
+
 
     }
 
@@ -176,7 +166,17 @@ public class BoxStats extends AppCompatActivity implements  ToggleBoxDialog.Togg
                 emptyTextView.setText("No data in this box");
             }
             boxOpenOrCloseButton.setText(isBoxOpen == 1 ? "Close Box" : "Open Box");
-
+            boxOpenOrCloseButton.setOnClickListener(new Button.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    DialogFragment confirm = new ToggleBoxDialog();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("BoxID", boxID);
+                    bundle.putInt("IsBoxOpen", isBoxOpen);
+                    confirm.setArguments(bundle);
+                    confirm.show(getSupportFragmentManager(), "confirm");
+                }
+            });
 
         }
     }
