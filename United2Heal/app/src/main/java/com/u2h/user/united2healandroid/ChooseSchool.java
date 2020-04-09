@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class ChooseSchool extends Fragment {
     @Nullable
@@ -22,6 +23,8 @@ public class ChooseSchool extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final UserInfo application=((UserInfo)getActivity().getApplication());
+
+        TextView pageTitle = (TextView)view.findViewById(R.id.pageTitle);
         ImageView logoVCU=(ImageView)view.findViewById(R.id.imageViewVCU);
         logoVCU.setOnClickListener(new ImageView.OnClickListener() {
             @Override
