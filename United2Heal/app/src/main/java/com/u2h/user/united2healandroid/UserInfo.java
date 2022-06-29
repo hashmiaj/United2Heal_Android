@@ -7,6 +7,7 @@ public class UserInfo extends Application {
 
     private String schoolName="";
     private String password="";
+    private String role="";
     public Boolean allowAsync=true;
 
     public String getPassword() {
@@ -33,4 +34,12 @@ public class UserInfo extends Application {
         this.schoolName = schoolName;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }
+

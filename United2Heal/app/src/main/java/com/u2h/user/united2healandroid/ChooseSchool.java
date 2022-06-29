@@ -9,8 +9,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class ChooseSchool extends Fragment {
     @Nullable
@@ -24,8 +29,14 @@ public class ChooseSchool extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         final UserInfo application=((UserInfo)getActivity().getApplication());
 
+        ArrayList<String> rolesList = new ArrayList<>();
+        rolesList.add("Volunteer");
+        rolesList.add("Admin");
+
         TextView pageTitle = (TextView)view.findViewById(R.id.pageTitle);
         ImageView logoVCU=(ImageView)view.findViewById(R.id.imageViewVCU);
+        final Spinner roleSpinner = (Spinner)view.findViewById(R.id.roleSpinner);
+
         logoVCU.setOnClickListener(new ImageView.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,6 +50,22 @@ public class ChooseSchool extends Fragment {
             public void onClick(View view) {
                 application.setSchoolName("GMU");
                 gotoPasswordPage();
+            }
+        });
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item, rolesList);
+        arrayAdapter.setDropDownViewResource(R.layout.spinner_layout_dropdown_resource);
+
+        roleSpinner.setAdapter(arrayAdapter);
+        roleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ((UserInfo) getActivity().getApplication()).setRole(roleSpinner.getAdapter().getItem(i).toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
 
