@@ -85,6 +85,8 @@ DrawerLayout drawer=(DrawerLayout) findViewById(R.id.drawer_layout);
 
     }
     //Handles main navigation between fragments
+    
+    //For password
     public void DisplayFrame(int id)
     {
         ((UserInfo)getApplication()).allowAsync=false;
@@ -112,6 +114,10 @@ DrawerLayout drawer=(DrawerLayout) findViewById(R.id.drawer_layout);
                 fragment=new BoxStatsMain();
                 getSupportActionBar().setTitle("Categories");
                 break;
+//            case R.id.nav_logout:
+//              fragment=new ChooseSchool();
+//              getSupportActionBar().setTitle("Choose School");
+//              break;
         }
 
         if(fragment != null)

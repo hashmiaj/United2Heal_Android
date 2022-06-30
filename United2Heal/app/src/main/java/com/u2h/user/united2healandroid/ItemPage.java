@@ -246,7 +246,7 @@ public class ItemPage extends AppCompatActivity implements CalendarDialog.Dialog
                     rs.next();
                     int id=rs.getInt("max")+1;
                     sql = "INSERT INTO u2hdb.ItemBox\n" +
-                            "Values (" + id + ",'" + itemID + "','"+((UserInfo)getApplication()).getGroupName()+"','"+ selectedBox +  "','"+selectedItem + "','" + itemQuantity+"','"+expirationDate+"','"+schoolName+"')";
+                            "Values (" + id + ",'" + itemID + "','"+((UserInfo)getApplication()).getGroupName()+"','"+ selectedBox +  "','"+selectedItem + "','" + itemQuantity+"','"+expirationDate+"','"+schoolName+"', '" +Calendar.getInstance().getTimeInMillis()+ "')";
                     stmnt.executeUpdate(sql);
                 }
                 conn.close();

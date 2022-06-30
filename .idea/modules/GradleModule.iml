@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id="GradleModule" external.linked.project.path="$USER_HOME$/StudioProjects/GradleModule" external.root.project.path="$USER_HOME$/StudioProjects/GradleModule" external.system.id="GRADLE" external.system.module.group="org.example" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_11">
+    <output url="file://$USER_HOME$/StudioProjects/GradleModule/build/classes/java/main" />
+    <output-test url="file://$USER_HOME$/StudioProjects/GradleModule/build/classes/java/test" />
+    <exclude-output />
+    <content url="file://$USER_HOME$/StudioProjects/GradleModule">
+      <sourceFolder url="file://$USER_HOME$/StudioProjects/GradleModule/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$USER_HOME$/StudioProjects/GradleModule/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$USER_HOME$/StudioProjects/GradleModule/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$USER_HOME$/StudioProjects/GradleModule/src/test/resources" type="java-test-resource" />
+      <excludeFolder url="file://$USER_HOME$/StudioProjects/GradleModule/.gradle" />
+      <excludeFolder url="file://$USER_HOME$/StudioProjects/GradleModule/build" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="jdk" jdkName="11" jdkType="JavaSDK" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.junit.platform:junit-platform-commons:1.7.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.junit.jupiter:junit-jupiter-api:5.7.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.apiguardian:apiguardian-api:1.1.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.opentest4j:opentest4j:1.2.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.junit.platform:junit-platform-engine:1.7.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.junit.jupiter:junit-jupiter-engine:5.7.0" level="project" />
+  </component>
+</module>
