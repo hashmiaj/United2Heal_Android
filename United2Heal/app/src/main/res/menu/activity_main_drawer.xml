@@ -26,7 +26,12 @@
             android:id="@+id/nav_read_excel"
             android:icon="@drawable/ic_menu_send"
             android:title="(Experimental) read excel" /></!-->
-<!--        Add logout here &#45;&#45;Step 1-->
+
+<!--        Logout Button has been added, but has no icon; can add that later-->
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_arrow_right_from_bracket_solid"
+            android:title="Log Out" />
 
     </group>
 
