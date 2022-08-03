@@ -94,6 +94,7 @@ DrawerLayout drawer=(DrawerLayout) findViewById(R.id.drawer_layout);
         //Create fragment based off of id of clicked navigation item
         switch(id){
             case 0:
+            case R.id.nav_logout:
                 fragment=new ChooseSchool();
                 getSupportActionBar().setTitle("Choose School");
                 break;
@@ -114,10 +115,6 @@ DrawerLayout drawer=(DrawerLayout) findViewById(R.id.drawer_layout);
                 fragment=new BoxStatsMain();
                 getSupportActionBar().setTitle("Categories");
                 break;
-//            case R.id.nav_logout:
-//              fragment=new ChooseSchool();
-//              getSupportActionBar().setTitle("Choose School");
-//              break;
         }
 
         if(fragment != null)

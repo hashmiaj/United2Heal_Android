@@ -79,7 +79,7 @@ public class PasswordPage extends Fragment {
                 Class.forName(DatabaseStrings.JDBC_DRIVER);
                 conn = DriverManager.getConnection(DatabaseStrings.DB_URL, DatabaseStrings.USERNAME, DatabaseStrings.PASSWORD);
                 stmnt = conn.createStatement();
-                String sql = "SELECT * from u2hdb.PasswordTable WHERE School='" + application.getSchoolName() + "'";
+                String sql = "SELECT * from u2hdb.PasswordTable WHERE School='" + application.getSchoolName() + "' AND Role='" + application.getRole() + "'";
                 ResultSet rs = stmnt.executeQuery(sql);
                 ArrayList<String> passwordList = new ArrayList<String>();
                 while (rs.next()) {

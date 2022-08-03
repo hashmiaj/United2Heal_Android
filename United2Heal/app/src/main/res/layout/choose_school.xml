@@ -11,10 +11,10 @@
 
         <Spinner
             android:id="@+id/roleSpinner"
-            android:layout_width="214dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="70dp"
             android:scaleType="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

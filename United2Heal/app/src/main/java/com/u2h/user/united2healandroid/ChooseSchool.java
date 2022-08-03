@@ -44,6 +44,7 @@ public class ChooseSchool extends Fragment {
                 gotoPasswordPage();
             }
         });
+
         ImageView logoGMU=(ImageView)view.findViewById(R.id.imageViewGMU);
         logoGMU.setOnClickListener(new ImageView.OnClickListener() {
             @Override
