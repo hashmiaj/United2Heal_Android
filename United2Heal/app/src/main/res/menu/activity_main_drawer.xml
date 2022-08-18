@@ -23,9 +23,34 @@
             android:icon="@drawable/ic_list_black_24dp"
             android:title="Box Stats" />
         <item
+            android:id="@+id/nav_open_new_box"
+            android:icon="@drawable/ic_box_open_solid"
+            android:title="Open New Box" />
+        <item
+            android:id="@+id/nav_close_box"
+            android:icon="@drawable/ic_box_closed_solid"
+            android:title="Close Box" />
+        <item
+            android:id="@+id/nav_export_item_table"
+            android:icon="@drawable/ic_table_solid"
+            android:title="Export Item Table" />
+        <item
+            android:id="@+id/nav_open_existing_box"
+            android:icon="@drawable/ic_box_open_solid"
+            android:title="Open Existing Box" />
+        <item
+            android:id="@+id/nav_change_password"
+            android:icon="@drawable/ic_key_solid"
+            android:title="Change Password" />
+        <item
+            android:id="@+id/nav_edit_box_stats"
+            android:icon="@drawable/ic_chart_line_solid"
+            android:title="Edit Box Stats" />
+        <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_arrow_right_from_bracket_solid"
             android:title="Log Out" />
+
 
     </group>
 

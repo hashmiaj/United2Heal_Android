@@ -3,12 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/prera/United2Heal_Android/United2Heal/app/src/main/res/drawable/ic_arrow_right_from_bracket_solid.xml" value="0.114" />
+        <entry key="..\:/Users/prera/United2Heal_Android/United2Heal/app/src/main/res/drawable/ic_arrow_right_from_bracket_solid.xml" value="0.1225" />
+        <entry key="..\:/Users/prera/United2Heal_Android/United2Heal/app/src/main/res/drawable/ic_box_open_solid.xml" value="0.1095" />
         <entry key="..\:/Users/prera/United2Heal_Android/United2Heal/app/src/main/res/drawable/ic_close_black_24dp.xml" value="0.1" />
+        <entry key="..\:/Users/prera/United2Heal_Android/United2Heal/app/src/main/res/drawable/ic_key_solid.xml" value="0.109" />
         <entry key="..\:/Users/prera/United2Heal_Android/United2Heal/app/src/main/res/drawable/ic_list_black_24dp.xml" value="0.114" />
         <entry key="..\:/Users/prera/United2Heal_Android/United2Heal/app/src/main/res/drawable/ic_search_black_24dp.xml" value="0.1685" />
+        <entry key="..\:/Users/prera/United2Heal_Android/United2Heal/app/src/main/res/drawable/ic_table_solid.xml" value="0.109" />
+        <entry key="..\:/Users/prera/United2Heal_Android/United2Heal/app/src/main/res/layout/activity_item_page.xml" value="0.161231884057971" />
+        <entry key="..\:/Users/prera/United2Heal_Android/United2Heal/app/src/main/res/layout/activity_main.xml" value="0.161231884057971" />
+        <entry key="..\:/Users/prera/United2Heal_Android/United2Heal/app/src/main/res/layout/add_item_page.xml" value="0.161231884057971" />
         <entry key="..\:/Users/prera/United2Heal_Android/United2Heal/app/src/main/res/layout/choose_school.xml" value="0.12817028985507245" />
-        <entry key="..\:/Users/prera/United2Heal_Android/United2Heal/app/src/main/res/menu/activity_main_drawer.xml" value="0.25" />
+        <entry key="..\:/Users/prera/United2Heal_Android/United2Heal/app/src/main/res/layout/password_page.xml" value="0.161231884057971" />
+        <entry key="..\:/Users/prera/United2Heal_Android/United2Heal/app/src/main/res/menu/activity_main_drawer.xml" value="0.2" />
       </map>
     </option>
   </component>

@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -81,6 +82,13 @@ public class choose_group extends Fragment {
                     fragmentTransaction.replace(R.id.MainFrame, fragment);
                     fragmentTransaction.commit();
                     ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Search Items");
+                    
+                    //Add if statements to check if Admin
+//                    boolean isAdmin = ((UserInfo)getActivity().getApplication()).getRole().equals("Admin");
+//                    if(isAdmin)
+//                        enableAdminItems();
+//                    else
+//                        enableVolunteerItems();
 
                 }
             }
@@ -153,4 +161,54 @@ public class choose_group extends Fragment {
             });
         }
     }
+
+//    public void enableVolunteerItems(){
+//        MenuItem searchItems = (MenuItem) getActivity().findViewById(R.id.nav_search_items);
+//        searchItems.setVisible(true);
+//        MenuItem exportExcel = (MenuItem) getActivity().findViewById(R.id.nav_export_excel);
+//        exportExcel.setVisible(true);
+//        MenuItem addItemPage = (MenuItem) getActivity().findViewById(R.id.nav_add_item_page);
+//        addItemPage.setVisible(true);
+//        MenuItem boxStats = (MenuItem) getActivity().findViewById(R.id.nav_box_stats);
+//        boxStats.setVisible(true);
+//
+//        MenuItem openNewBox = (MenuItem) getActivity().findViewById(R.id.nav_open_new_box);
+//        openNewBox.setVisible(false);
+//        MenuItem closeBox = (MenuItem) getActivity().findViewById(R.id.nav_close_box);
+//        closeBox.setVisible(false);
+//        MenuItem exportItemTable = (MenuItem) getActivity().findViewById(R.id.nav_export_item_table);
+//        exportItemTable.setVisible(false);
+//        MenuItem openExistingBox = (MenuItem) getActivity().findViewById(R.id.nav_open_existing_box);
+//        openExistingBox.setVisible(false);
+//        MenuItem changePassword = (MenuItem) getActivity().findViewById(R.id.nav_change_password);
+//        changePassword.setVisible(false);
+//        MenuItem editBoxStats = (MenuItem) getActivity().findViewById(R.id.nav_edit_box_stats);
+//        editBoxStats.setVisible(false);
+//
+//    }
+//
+//    public void enableAdminItems(){
+//        MenuItem searchItems = (MenuItem) getActivity().findViewById(R.id.nav_search_items);
+//        searchItems.setVisible(false);
+//        MenuItem exportExcel = (MenuItem) getActivity().findViewById(R.id.nav_export_excel);
+//        exportExcel.setVisible(false);
+//        MenuItem addItemPage = (MenuItem) getActivity().findViewById(R.id.nav_add_item_page);
+//        addItemPage.setVisible(false);
+//        MenuItem boxStats = (MenuItem) getActivity().findViewById(R.id.nav_box_stats);
+//        boxStats.setVisible(false);
+//
+//        MenuItem openNewBox = (MenuItem) getActivity().findViewById(R.id.nav_open_new_box);
+//        openNewBox.setVisible(true);
+//        MenuItem closeBox = (MenuItem) getActivity().findViewById(R.id.nav_close_box);
+//        closeBox.setVisible(true);
+//        MenuItem exportItemTable = (MenuItem) getActivity().findViewById(R.id.nav_export_item_table);
+//        exportItemTable.setVisible(true);
+//        MenuItem openExistingBox = (MenuItem) getActivity().findViewById(R.id.nav_open_existing_box);
+//        openExistingBox.setVisible(true);
+//        MenuItem changePassword = (MenuItem) getActivity().findViewById(R.id.nav_change_password);
+//        changePassword.setVisible(true);
+//        MenuItem editBoxStats = (MenuItem) getActivity().findViewById(R.id.nav_edit_box_stats);
+//        editBoxStats.setVisible(true);
+//
+//    }
 }
